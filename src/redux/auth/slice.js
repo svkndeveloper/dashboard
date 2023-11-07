@@ -8,6 +8,9 @@ const initialState = {
   isRefreshing: false,
   error: null,
   pending: false,
+  accessToken: null,
+  refreshToken: null,
+  sid: null,
 };
 
 const authSlice = createSlice({
@@ -16,12 +19,11 @@ const authSlice = createSlice({
   reducers: {
     },
   extraReducers: builder =>
-     builder.addCase(register.fulfilled, (state, action) => {
-      state.user = action.payload.user;
-      state.token = action.payload.token;
-      state.isLoggedIn = true;
+    builder.addCase(register.fulfilled, (state, action) => {
+    console.log(action)      
     })
-     .addCase(register.rejected, (state, action) => {
+      .addCase(register.rejected, (state, action) => {
+       console.log(action)
         state.error = action.payload;
         state.pending = false;
     })
@@ -29,9 +31,12 @@ const authSlice = createSlice({
       state.pending = true;
       state.error = null;
     })
-    .addCase(logIn.fulfilled,(state, action) => {
-      state.user = action.payload.user;
-      state.token = action.payload.token;
+      .addCase(logIn.fulfilled, (state, action) => {
+        console.log(action)
+        state.user = action.payload.userData;
+        state.sid = action.payload.sid;
+        state.accessToken = action.payload.accessToken;
+        state.refreshToken = action.payload.refreshToken;
       state.isLoggedIn = true;
        state.pending = false;
     })
@@ -39,18 +44,20 @@ const authSlice = createSlice({
         state.error = action.payload;
         state.pending = false;
     })
-    .addCase(logOut.fulfilled, state => {
+      .addCase(logOut.fulfilled, state => {
       state.user = { name: null, email: null };
-      state.token = null;
+      state.accessToken = null;
       state.isLoggedIn = false;
     })
     .addCase(refreshUser.pending, state => {
       state.isRefreshing = true;
     })
-    .addCase(refreshUser.fulfilled,(state, action) => {
-      state.user = action.payload;
-      state.isLoggedIn = true;
-      state.isRefreshing = false;
+      .addCase(refreshUser.fulfilled, (state, action) => {
+        state.isLoggedIn = true;
+        state.isRefreshing = false;
+        state.sid = action.payload.newSid;
+        state.accessToken = action.payload.newAccessToken;
+        state.refreshToken = action.payload.newRefreshToken;
     })
     .addCase(refreshUser.rejected, state => {
       state.isRefreshing = false;
