@@ -3,13 +3,12 @@ import { NavLink } from 'react-router-dom';
 
 
 export const StyledMainDiv = styled.div`
-padding-top: 240px;
-padding-left: 229px;
+
 
 `
 
 export const StyledTitle = styled.h2`
-
+margin: 0;
 color: #00D7FF;
 font-family: HelveticaNeueCyr;
 font-size: 24px;
@@ -20,7 +19,10 @@ letter-spacing: 0.48px;
 `
 
 export const StyledText = styled.p`
+margin-top: 80px;
+margin-bottom:35px;
 width: 562px;
+height: 135px;
 color: #15395A;
 font-family: HelveticaNeueCyr;
 font-size: 36px;
@@ -42,8 +44,10 @@ letter-spacing: 0.48px;
 
 export const StyledNavLink = styled(NavLink)`
     text-decoration:none;
+    transition: all 250ms linear;
   &.active {
     color: #00D7FF;
+    cursor: default;
   }
     &:not(.active) {
     color: grey;

@@ -1,5 +1,6 @@
 import { logIn } from "redux/auth/operations";
 import { useDispatch } from "react-redux";
+import { StyledInputsBlock, StyledForm,CssTextField } from "./LoginForm.styled";
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
@@ -15,14 +16,13 @@ export const LoginForm = () => {
 }
 
     return (
-         <form onSubmit={handleSubmit}>
-             <label>
-                <input name='email' type='text' />
-            </label>
-             <label>
-                <input name='password' type='text' />
-            </label>
-            <button type="submit">GO!</button>
-        </form>
+        <StyledForm onSubmit={handleSubmit}>
+            <StyledInputsBlock>
+            <CssTextField label='email' id="standard-basic" variant="standard" name='email' type='text'  />
+            <CssTextField label='password'   id="standard-basic" variant="standard" name='password' type='text'/>
+            </StyledInputsBlock>
+                
+            <button className='submit-btn' type="submit">go!</button>
+                    </StyledForm>
     )
 }

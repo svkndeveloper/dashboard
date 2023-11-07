@@ -11,7 +11,7 @@ a thrilling game full of amazing
 quests and exciting challenges.
             </StyledText>
             <StyledNavText>
-                Choose your name to <StyledNavLink to="/">sign up</StyledNavLink> or <StyledNavLink to="/login">log in</StyledNavLink>
+                Choose your name to <StyledNavLink to="/register">sign up</StyledNavLink> or <StyledNavLink to="/login">log in</StyledNavLink>
             </StyledNavText>
              
         </StyledMainDiv>

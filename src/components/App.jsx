@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import { RegisterPage } from 'pages/Register';
 import { LoginPage } from 'pages/Login';
 
@@ -15,8 +15,9 @@ export const App = () => {
      dispatch(refreshUser());
     }, [dispatch]);
   return (
-     <Routes>
-          <Route path="/" element={
+    <Routes>
+       <Route path="/" element={<Navigate to="/register" />} />
+          <Route path="/register" element={
             <RestrictedRoute redirectTo="/dashboard" component={<RegisterPage />} />
           } />
           <Route path="/login" element={
