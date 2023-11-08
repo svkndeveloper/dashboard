@@ -1,7 +1,7 @@
 import { logOut } from "redux/auth/operations";
 import { useDispatch } from "react-redux";
 import { AddTaskButton } from "components/AddTaskButton/AddTaskButton";
-import { useState } from "react";
+// import { useState } from "react";
 import { ModalNewTask } from "components/ModalNewTask/ModalNewTask";
 export const Dashboard = () => {
     // const [showModal, setShowModal] = useState(false);
