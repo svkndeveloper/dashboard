@@ -2,9 +2,9 @@ import Select, { components } from 'react-select';
 import { ReactComponent as SelectArrowSvg } from '../../images/selectarrow.svg';
 
 const options = [
-    { value: 'easy', label: <div style={{ display: 'flex', gap:'5px', width:'100%'}}><span style={{ color: '#00D7FF'}}>●</span> Easy</div>},
-  { value: 'normal', label: <div style={{ display: 'flex', gap:'5px', width:'100%'}}><span style={{ color: '#24D40C' }}>●</span> Normal</div> },
-  { value: 'hard', label: <div style={{ display: 'flex', gap:'5px', width:'100%'}}><span style={{ color: '#DB0837' }}>●</span> Hard</div> },
+    { value: 'Easy', label: <div style={{ display: 'flex', gap:'5px', width:'100%'}}><span style={{ color: '#00D7FF'}}>●</span> Easy</div>},
+  { value: 'Normal', label: <div style={{ display: 'flex', gap:'5px', width:'100%'}}><span style={{ color: '#24D40C' }}>●</span> Normal</div> },
+  { value: 'Hard', label: <div style={{ display: 'flex', gap:'5px', width:'100%'}}><span style={{ color: '#DB0837' }}>●</span> Hard</div> },
 ];
 const DropdownIndicator = (props) => {
   return (
@@ -15,19 +15,26 @@ const DropdownIndicator = (props) => {
 };
 const customStyles = {
      container: (provided, state) => ({
-        ...provided,
-      width:'100px',
+    ...provided,
+    position: 'absolute',
+       top:'10px',
+    width: '110px',
+    borderTopRightRadius: '50%',
+    paddingLeft: '15px'
   
   }),
   control: (provided, state) => ({
         ...provided,
-      width:'90px',
+    width: '80px',
+      height: '25px',
+            minHeight: '25px',
         borderColor: 'transparent',
         backgroundColor: 'transparent',
     boxShadow: 'none', 
     cursor: 'pointer',
+    
  '&:hover': {
-     backgroundColor: 'transparent',
+     backgroundColor: '#F99943',
      boxShadow: 'none',
        borderColor: 'transparent',
     },
@@ -73,17 +80,27 @@ backgroundColor: 'transparent',
     backgroundRepeat: 'no-repeat',
        backgroundSize: 'contain',
     padding: '0px',
+    
   }),
 valueContainer: (provided, state) => ({
     ...provided,
-    paddingRight: '0px',
-  paddingLeft: '15px',
+    padding: '0px',
+  
+  width: '72px'
+  }),
+    input: (provided, state) => ({
+    ...provided,
+    padding: '0px',
     }),
     indicatorsContainer: (provided, state) => ({
     ...provided,
-    width: '5px'
+    width: '10px'
     }),
-   
+     singleValue: provided => ({
+    ...provided,
+           fontSize: '14px',
+    color: '#B9C3C8',
+    }),
  
  };
 
