@@ -1,5 +1,20 @@
 import { styled } from "styled-components";
 import TextField from '@mui/material/TextField';
+import { ReactComponent as Eye } from '../../images/eye.svg';
+import { ReactComponent as Eye1 } from '../../images/eye1.svg';
+
+export const StyledEye = styled(Eye)`
+transition: all 250ms linear;
+&:hover path {
+    fill:#00D7FF;
+}
+`
+export const StyledEye1 = styled(Eye1)`
+transition: all 250ms linear;
+&:hover path{
+    fill:#00D7FF;
+}
+`
 export const StyledForm = styled.form`
 display: flex;
 gap: 20px;
@@ -8,7 +23,7 @@ height: 200px;
         cursor: pointer;
     color: #FFF;
 text-align: center;
-font-family: HelveticaNeueCyr;
+font-family: Roboto;
 font-size: 24px;
 font-style: normal;
 font-weight: 700;
@@ -33,9 +48,31 @@ transition: all 300ms linear;
 `
 
 export const StyledInputsBlock = styled.div`
+position: relative;
 display: flex;
 flex-direction: column;
 gap: 10px;
+
+.password-btn{
+    cursor: pointer;
+    width:30px;
+    height: 30px;
+    background-color: transparent;
+    border:none;
+    position: absolute;
+    bottom: 35px;
+    right: 0;
+}
+.password-btn-login{
+      cursor: pointer;
+    width:30px;
+    height: 30px;
+    background-color: transparent;
+    border:none;
+    position: absolute;
+    bottom: 95px;
+    right: 0;
+}
 `
 
 export const CssTextField = styled(TextField)({

@@ -5,6 +5,7 @@ const initialState = {
     cards: [],
     error: null,
     isLoading: null,
+    
 }
 
 const cardsSlice = createSlice({
@@ -20,7 +21,7 @@ const cardsSlice = createSlice({
     state.isLoading = true; 
     })
             .addCase(addCardThunk.fulfilled, (state, action) => {
-                console.log(state.cards)
+                
         state.isLoading = false;
                 state.error = null;
                
@@ -35,13 +36,13 @@ const cardsSlice = createSlice({
     state.isLoading = true; 
     })
             .addCase(getCardsThunk.fulfilled, (state, action) => {
-                console.log(action)
+              
         state.isLoading = false;
       state.error = null;
       state.cards = action.payload.cards;
             })
             .addCase(getCardsThunk.rejected, (state, action) => {
-                console.log(action)
+                
          state.isLoading = false;
       state.error = action.payload;
     })

@@ -1,10 +1,15 @@
 import { logIn } from "redux/auth/operations";
 import { useDispatch } from "react-redux";
-import { StyledInputsBlock, StyledForm,CssTextField } from "./LoginForm.styled";
+import { useState } from "react";
+import { StyledInputsBlock, StyledForm,CssTextField,StyledEye,StyledEye1 } from "./LoginForm.styled";
 
 export const LoginForm = () => {
   const dispatch = useDispatch();
-   
+    const [showPassword, setShowPassword] = useState(false);
+ 
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
     const handleSubmit = e => {
         e.preventDefault();
         const form = e.currentTarget;
@@ -19,7 +24,8 @@ export const LoginForm = () => {
         <StyledForm onSubmit={handleSubmit}>
             <StyledInputsBlock>
             <CssTextField label='email' id="standard-basic" variant="standard" name='email' type='text'  />
-            <CssTextField label='password'   id="standard-basic" variant="standard" name='password' type='text'/>
+                <CssTextField label='password' id="standard-basic" variant="standard" name='password' type={showPassword ? 'text' : 'password'} />
+                <button className='password-btn-login' type='button' onClick={toggleShowPassword}>{showPassword ? <StyledEye/> : <StyledEye1/>}</button>
             </StyledInputsBlock>
                 
             <button className='submit-btn' type="submit">go!</button>

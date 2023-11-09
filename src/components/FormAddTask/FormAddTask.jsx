@@ -1,18 +1,19 @@
 import { Formik, Field } from 'formik';
 import { SelectLevel } from 'components/ReactSelect/SelectLevel';
 import { SelectType } from 'components/ReactSelect/SelectType';
-import { StyledForm } from './FormAddTask.styled';
+import { StyledForm, StyledClearSvg, StyledLineVertSvg } from './FormAddTask.styled';
 import { DatePickerTask } from 'components/DatePicker/DatePickerTask';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch} from 'react-redux';
 import { addCardThunk } from 'redux/cards/operations';
+
 const levelDefault = 'Normal';
 const typeDefault = 'Stuff';
 
 export const FormAddTask = () => {
-  const cardType = useSelector(state => state.cards.cardType);
+  // const cardType = useSelector(state => state.cards.cardType);
   const dispatch = useDispatch();
-  // const cards = useSelector(state => state.cards.cards) 
-  console.log(cardType)
+ 
+
     const handleSubmit = (values, { resetForm } )=> {
         
                 if (!values.selectDate) {
@@ -88,8 +89,13 @@ const day = String(values.selectDate.getDate()).padStart(2, '0');
                                
                   />
                 )}
-                    </Field>
-              <button type="submit">Submit</button>
+            </Field>
+            <div className='btns-block'>
+              <button className='clear-button' type='button'><StyledClearSvg /></button>
+              <StyledLineVertSvg/>
+              <button className='start-button' type="submit">START</button>
+            </div>
+              
             </StyledForm>
           )}
         </Formik>

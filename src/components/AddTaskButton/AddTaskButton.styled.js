@@ -1,6 +1,9 @@
 import { styled } from "styled-components";
 import {ReactComponent as PlusSvg} from 'images/plus.svg'
 export const StyledAddTaskButton = styled.button`
+position: fixed;
+bottom: 40px;
+right: 40px;
 cursor: pointer;
 padding:0;
 width: 52px;

@@ -1,9 +1,55 @@
 import { styled } from "styled-components";
 import { Form } from 'formik';
+import { ReactComponent as ClearSvg } from '../../images/clear.svg';
+import {ReactComponent as LineVertSvg} from '../../images/linevert.svg'
+
+export const StyledClearSvg = styled(ClearSvg)`
+transition: all 300ms linear;
+&:hover {
+  transform: rotate(180deg) scale(1.1);
+}
+`
+
+export const StyledLineVertSvg = styled(LineVertSvg)`
+
+`
 
 export const StyledForm = styled(Form)`
 padding-top: 70px;
 
+
+.btns-block{
+  position: absolute;
+  right: 20px;
+  bottom: 24px;
+display: flex;
+gap: 5px;
+align-items: center;
+
+}
+
+.clear-button{
+  cursor: pointer;
+background-color: transparent;
+border: none;
+}
+.start-button {
+  cursor: pointer;
+  background-color: transparent;
+border: none;
+color: #00D7FF;
+font-family: Roboto;
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+letter-spacing: 0.28px;
+transition: all 250ms linear;
+}
+.start-button:hover {
+  text-shadow: 1px 1px 2px #FF7F50;
+  scale:1.1;
+}
 
 .addtask-name-block{
     display: flex;
@@ -27,7 +73,7 @@ padding-top: 70px;
 .task-label{
     color: #B9C3C8;
 text-align: center;
-font-family: HelveticaNeueCyr;
+font-family: Roboto;
 font-size: 12px;
 font-style: normal;
 font-weight: 700;
@@ -55,7 +101,7 @@ cursor: pointer;
 .date-span {
     cursor: pointer;
     color: #282828;
-font-family: HelveticaNeueCyr;
+font-family: Roboto;
 font-size: 14px;
 font-style: normal;
 font-weight: 400;
