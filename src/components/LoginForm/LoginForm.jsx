@@ -25,7 +25,7 @@ export const LoginForm = () => {
             <StyledInputsBlock>
             <CssTextField label='email' id="standard-basic" variant="standard" name='email' type='text'  />
                 <CssTextField label='password' id="standard-basic" variant="standard" name='password' type={showPassword ? 'text' : 'password'} />
-                <button className='password-btn-login' type='button' onClick={toggleShowPassword}>{showPassword ? <StyledEye/> : <StyledEye1/>}</button>
+                <button className='password-btn-login' type='button' onClick={toggleShowPassword}>{!showPassword ? <StyledEye/> : <StyledEye1/>}</button>
             </StyledInputsBlock>
                 
             <button className='submit-btn' type="submit">go!</button>

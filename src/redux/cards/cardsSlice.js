@@ -25,7 +25,7 @@ const cardsSlice = createSlice({
         state.isLoading = false;
                 state.error = null;
                
-      state.cards = [...state.cards, action.payload.createdCard];
+      state.cards = [action.payload.createdCard, ...state.cards];
             })
             .addCase(addCardThunk.rejected, (state, action) => {
                

@@ -47,7 +47,7 @@ const day = String(selectedDate.getDate()).padStart(2, '0');
 const hour = String(selectedDate.getHours()).padStart(2, '0');
 const minutes = String(selectedDate.getMinutes()).padStart(2, '0');
 
-return `${year}/${month}/${day} ${hour}:${minutes}`;
+return `${year}-${month}-${day}, ${hour}:${minutes}`;
 }
 
 
