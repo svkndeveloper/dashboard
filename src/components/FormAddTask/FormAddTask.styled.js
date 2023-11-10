@@ -32,6 +32,7 @@ align-items: center;
   cursor: pointer;
 background-color: transparent;
 border: none;
+
 }
 .start-button {
   cursor: pointer;

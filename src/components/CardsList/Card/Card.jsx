@@ -1,17 +1,26 @@
 import { StyledLi } from "./Card.styled";
-import { formatDateToWord } from "helpers/formatDate";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Formik, Field } from "formik";
 import { StyledForm,StyledClearSvg ,StyledLineVertSvg } from "components/FormAddTask/FormAddTask.styled";
 import { SelectLevel } from "components/ReactSelect/SelectLevel";
 import { SelectType } from "components/ReactSelect/SelectType";
 import { DatePickerTask } from "components/DatePicker/DatePickerTask";
+import { changeEditStatus } from "redux/cards/cardsSlice";
+import {useDispatch, useSelector} from 'react-redux'
+import { editCardThunk, deleteCardThunk } from "redux/cards/operations";
+import { StyledCheckSvg, StyledSaveSvg } from "./Card.styled";
 
-
-export const Card = ({ card }) => {
-    const {  title, difficulty,time, date, category} = card;
-    const [isEditing, setIsEditing] = useState(true);
-
+export const Card = ({ card, handleEditing, editId }) => {
+    const {  _id, title, difficulty,time, date, category, type} = card;
+    const [isEditing, setIsEditing] = useState(false);
+    const editStatus = useSelector(state => state.cards.editStatus);
+    const dispatch = useDispatch();
+   
+    useEffect(() => {
+        if (editId !== _id) {
+        setIsEditing(false)
+    }
+},[_id, editId])
     let colorDiff;
     switch (difficulty) {
         case 'Easy':
@@ -49,18 +58,48 @@ export const Card = ({ card }) => {
       default:
         categoryBackgroundColor = '#B9C3C8'; 
     }
-    const handleSubmit = values => {
-    console.log(values)
+    const handleSubmit = (values, {resetForm}) => {
+        console.log(values.selectDate)
+                 if (!values.selectDate) {
+            return alert('оберіть дату');
+          }
+ const year = values.selectDate.getFullYear();
+const month = String(values.selectDate.getMonth() + 1).padStart(2, '0'); 
+const day = String(values.selectDate.getDate()).padStart(2, '0');
+        const formattedDate = `${year}-${month}-${day}`;
+        const formattedTime = values.selectDate.toLocaleTimeString('uk-UA', {
+  hour: '2-digit',
+  minute: '2-digit',
+        });
+        console.log(values.selectDate)
+        console.log(formattedTime)
+      const { taskInput, selectLevel,selectType } = values;
+      const newCard = {
+        title: taskInput,
+        difficulty: selectLevel,
+        category: selectType,
+        date: formattedDate,
+        time: formattedTime,
+        type: type
+      }
+        dispatch(editCardThunk({ _id, newCard }));
+       
 }
     return (
-        <StyledLi onClick={()=>setIsEditing(!isEditing)}>
+        <StyledLi onClick={() => {
+            if (editStatus && _id === editId) return;
+            handleEditing(_id)
+            setIsEditing(!isEditing)
+            dispatch(changeEditStatus(true))
+        }
+        }>
             {!isEditing ?
                 <>
                     <span className='difficulty' ><span className='circle' style={{ backgroundColor: colorDiff }}></span>{difficulty}</span>
                     <span className='category' style={{ backgroundColor: categoryBackgroundColor }}>{category}</span>
                     <div className='infoblock'>
                         <p className='title'>{title}</p>
-                        <p className='date-time'>{formatDateToWord(date)}</p>
+                        <p className='date-time'>{`${date}, ${time}`}</p>
                     </div>
                 </> :
                 <Formik
@@ -113,10 +152,20 @@ export const Card = ({ card }) => {
                                 )}
                             </Field>
                             <div className='btns-block'>
-                                <button className='clear-button' type='button'><StyledClearSvg /></button>
+                                 <button className='clear-button' type="submit"> <StyledSaveSvg /></button>
                                 <StyledLineVertSvg />
-                                <button className='start-button' type="submit">START</button>
-                            </div>
+                                <button className='clear-button' type='button' onClick={() => {
+                                    dispatch(deleteCardThunk(_id))
+                                                                 setIsEditing(false)
+        dispatch(changeEditStatus(false))
+                                }
+                                }><StyledClearSvg /></button>
+                                <StyledLineVertSvg />
+                                <button className='clear-button' type='button' onClick={() => {
+                                    setIsEditing(false)
+        dispatch(changeEditStatus(false))
+                                }}><StyledCheckSvg/></button>
+                                                         </div>
               
                         </StyledForm>
                     )}

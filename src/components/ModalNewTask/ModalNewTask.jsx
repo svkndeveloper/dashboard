@@ -1,12 +1,12 @@
 import { StyledOverlay, StyledModal } from './ModalNewTask.styled';
 import { FormAddTask } from 'components/FormAddTask/FormAddTask';
 
-export const ModalNewTask = () => {
+export const ModalNewTask = ({handleCloseModal}) => {
 
   return (
     <StyledOverlay>
       <StyledModal>
-        <FormAddTask/>
+        <FormAddTask handleCloseModal={handleCloseModal} />
       </StyledModal>
     </StyledOverlay>
   );

@@ -1,4 +1,14 @@
 import { styled } from "styled-components";
+import { ReactComponent as CheckSvg } from '../../../images/check.svg'
+import {ReactComponent as SaveSvg} from '../../../images/save.svg'
+
+export const StyledCheckSvg = styled(CheckSvg)`
+
+`
+
+export const StyledSaveSvg = styled(SaveSvg)`
+
+`
 
 export const StyledLi = styled.li`
 position:relative;

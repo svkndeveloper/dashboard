@@ -9,7 +9,7 @@ import { addCardThunk } from 'redux/cards/operations';
 const levelDefault = 'Normal';
 const typeDefault = 'Stuff';
 
-export const FormAddTask = () => {
+export const FormAddTask = ({handleCloseModal}) => {
   // const cardType = useSelector(state => state.cards.cardType);
   const dispatch = useDispatch();
  
@@ -23,7 +23,7 @@ export const FormAddTask = () => {
 const month = String(values.selectDate.getMonth() + 1).padStart(2, '0'); 
 const day = String(values.selectDate.getDate()).padStart(2, '0');
         const formattedDate = `${year}-${month}-${day}`;
-        const formattedTime = values.selectDate.toLocaleString('uk-UA', {
+        const formattedTime = values.selectDate.toLocaleTimeString('uk-UA', {
   hour: '2-digit',
   minute: '2-digit',
         });
@@ -91,7 +91,7 @@ const day = String(values.selectDate.getDate()).padStart(2, '0');
                 )}
             </Field>
             <div className='btns-block'>
-              <button className='clear-button' type='button'><StyledClearSvg /></button>
+              <button className='clear-button' type='button' onClick={handleCloseModal}><StyledClearSvg /></button>
               <StyledLineVertSvg/>
               <button className='start-button' type="submit">START</button>
             </div>

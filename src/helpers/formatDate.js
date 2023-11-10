@@ -1,7 +1,7 @@
 export function formatDateToWord(date) {
   const currentDate = new Date();
-  const selectedDate = new Date(date);
-  let minutes1 = selectedDate.getMinutes();
+    const selectedDate = new Date(date);
+    let minutes1 = selectedDate.getMinutes();
 const roundedMinutes = Math.ceil(minutes1 / 30) * 30;
 
 if (roundedMinutes >= 60) {

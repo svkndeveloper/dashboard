@@ -27,3 +27,30 @@ export const addCardThunk = createAsyncThunk(
     }
   }
 );
+
+export const editCardThunk = createAsyncThunk(
+  "cards/editCards",
+  async ({ _id, newCard }, thunkAPI) => {
+    try {
+        const response = await axios.patch(`/card/${_id}`,newCard);
+        return response.data;
+    } catch (e) {
+      
+              return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
+export const deleteCardThunk = createAsyncThunk(
+  "cards/deleteCards",
+  async (_id, thunkAPI) => {
+    try {
+      const response = await axios.delete(`/card/${_id}`);
+      console.log(response)
+        return _id;
+    } catch (e) {
+      
+              return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
