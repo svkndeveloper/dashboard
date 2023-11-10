@@ -19,8 +19,8 @@ export const RegistrationForm = () => {
         password: form.elements.password.value
     }))
         form.reset();
-}
-
+    }
+    
     return (
         <StyledForm onSubmit={handleSubmit}>
             <StyledInputsBlock>
