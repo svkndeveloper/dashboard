@@ -10,10 +10,12 @@ import {useDispatch, useSelector} from 'react-redux'
 import { editCardThunk, deleteCardThunk } from "redux/cards/operations";
 import { StyledCheckSvg, StyledSaveSvg } from "./Card.styled";
 import {formatJustDateToWord } from "helpers/formatJustDate";
-import {ReactComponent as FireSvg} from '../../../images/fire.svg'
+import { ReactComponent as FireSvg } from '../../../images/fire.svg';
+
 export const Card = ({ card, handleEditing, editId }) => {
     const {  _id, title, difficulty,time, date, category, type} = card;
     const [isEditing, setIsEditing] = useState(false);
+     const [timeRemaining, setTimeRemaining] = useState(null);
     const editStatus = useSelector(state => state.cards.editStatus);
     const dispatch = useDispatch();
    
@@ -86,32 +88,25 @@ const day = String(values.selectDate.getDate()).padStart(2, '0');
        
     }
     
-  const [timeRemaining, setTimeRemaining] = useState(null);
+ 
 useEffect(() => {
-    const intervalId = setInterval(() => {
+    const checkTimeAndSetRemaining = () => {
       const current_time = new Date();
       const time_difference = new Date(date) - current_time;
       const seconds_remaining = Math.floor(time_difference / 1000);
-console.log(seconds_remaining)
+
+      console.log(seconds_remaining);
+
       if (seconds_remaining < 2 * 60 * 60) {
-    
         setTimeRemaining(true);
       } else {
-      
         setTimeRemaining(false);
       }
-    }, 100000); 
-
-    return () => clearInterval(intervalId); 
+    };
+    checkTimeAndSetRemaining();
+    const intervalId = setInterval(checkTimeAndSetRemaining, 100000);
+    return () => clearInterval(intervalId);
   }, [date]);
-
-
-
-
-
-
-
-
 
 
     return (
