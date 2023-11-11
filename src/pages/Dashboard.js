@@ -28,16 +28,19 @@ export const Dashboard = () => {
     transitions(
       (styles, item) =>
         item && (
-          <animated.div style={{ ...styles, overflowY: 'hidden'}}>
-                             <h1>My dashboard</h1>
+          <div>
+          <animated.div style={{ ...styles }}>
+                                      <h1>My dashboard</h1>
             {showModal && <ModalNewTask handleCloseModal={handleCloseModal} />}
             <CardList/>
             <button type="button" onClick={()=>dispatch(logOut())}>Log Out</button>
-            <AddTaskButton type='button' onClick={() => {
+           
+            </animated.div>
+             <AddTaskButton type='button' onClick={() => {
                 setShowModal(true)
                 dispatch(pickCardType('Task'))
                             }} />
-                                        </animated.div>
+            </div>
          ))
     )
 }

@@ -19,8 +19,15 @@ html {
 body {
   overflow-x: hidden;
   background: #fff;
+  // position: relative;
+  // width: 100vw;
+  // height: 100vh;
  }
-
+// #root {
+//    position: relative;
+//   width: 100vw;
+//   min-height: 100vh;
+// }
 img {
   display: block;
   width: 100%;
