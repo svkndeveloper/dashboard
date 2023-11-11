@@ -5,13 +5,15 @@ const initialState = {
     cards: [],
     error: null,
     isLoading: null,
-   editStatus: false
+    editStatus: false,
+   
 }
 
 const cardsSlice = createSlice({
     name: 'cards',
     initialState,
     reducers: {
+      
         pickCardType(state, action) {
            state.cardType = action.payload
         },

@@ -11,13 +11,17 @@ const initialState = {
   accessToken: null,
   refreshToken: null,
   sid: null,
+   currentUser: null
   };
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-     },
+    setCurrentUser(state, action) {
+      state.currentUser = action.payload
+    },
+  },
   extraReducers: builder =>
     builder.addCase(register.fulfilled, (state, action) => {
     console.log(action)      
@@ -69,3 +73,4 @@ const authSlice = createSlice({
 );
 
 export const authReducer = authSlice.reducer;
+export const { setCurrentUser} = authSlice.actions;

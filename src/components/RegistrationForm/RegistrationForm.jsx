@@ -2,6 +2,7 @@ import { register } from "redux/auth/operations";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { StyledInputsBlock, StyledForm , CssTextField,StyledEye,StyledEye1} from "components/LoginForm/LoginForm.styled";
+import { setCurrentUser } from "redux/auth/slice";
 
 export const RegistrationForm = () => {
     const dispatch = useDispatch();
@@ -17,7 +18,8 @@ export const RegistrationForm = () => {
         dispatch(register({
         email: form.elements.email.value,
         password: form.elements.password.value
-    }))
+        }))
+        dispatch(setCurrentUser(form.elements.name.value))
         form.reset();
     }
     

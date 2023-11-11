@@ -38,6 +38,7 @@ const day = String(values.selectDate.getDate()).padStart(2, '0');
       }
    
       dispatch(addCardThunk(newCard))
+      handleCloseModal()
       resetForm();
     };
     return(

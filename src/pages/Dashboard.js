@@ -6,10 +6,14 @@ import { ModalNewTask } from "components/ModalNewTask/ModalNewTask";
 import { pickCardType } from "redux/cards/cardsSlice";
 import { CardList } from "components/CardsList/CardList";
 import { animated, useTransition } from 'react-spring';
-import { StyledMainDiv,StyledHeader,StyledContainer,StyledHeaderContainer } from "./Dashboard.styled";
+import { StyledMainDiv,StyledHeader,StyledContainer,StyledHeaderContainer,StyledLogoutSvg,StyledLogoutButton } from "./Dashboard.styled";
+import { useSelector } from "react-redux";
 
 export const Dashboard = () => {
-    const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const currentUser = useSelector(state => state.auth.currentUser);
+  const userEmail = useSelector(state => state.auth.isLoggedIn);
+  console.log(userEmail)
     const handleCloseModal = () => {
         setShowModal(false)
     }
@@ -34,17 +38,24 @@ export const Dashboard = () => {
             <StyledHeader>
               <StyledHeaderContainer>
                 <p className='title'>Quesify</p>
+                <p>{currentUser ?? userEmail.email}</p>
+                <StyledLogoutButton type="button" onClick={() => dispatch(logOut())}>
+                  <StyledLogoutSvg/>
+                </StyledLogoutButton>
+                
               </StyledHeaderContainer>
               
             </StyledHeader>
             <StyledMainDiv>
              <StyledContainer>
-                                      <h1>My dashboard</h1>
-            {showModal && <ModalNewTask handleCloseModal={handleCloseModal} />}
-                <animated.div style={{ ...styles, overflowX: 'hidden' }}>
-            <CardList/>
+                                      <p className='dayname-text'>Today</p>
+            {/* {showModal && <ModalNewTask handleCloseModal={handleCloseModal} />} */}
+                <animated.div style={{ ...styles, positio: 'absolute', width: '100%', overflowX: 'hidden' }}>
+                  <CardList>
+                    {showModal && <ModalNewTask handleCloseModal={handleCloseModal} />}
+            </CardList>
             </animated.div>
-            <button type="button" onClick={()=>dispatch(logOut())}>Log Out</button>
+            
             <AddTaskButton type='button' onClick={() => {
                 setShowModal(true)
                 dispatch(pickCardType('Task'))

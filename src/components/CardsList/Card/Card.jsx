@@ -9,7 +9,8 @@ import { changeEditStatus } from "redux/cards/cardsSlice";
 import {useDispatch, useSelector} from 'react-redux'
 import { editCardThunk, deleteCardThunk } from "redux/cards/operations";
 import { StyledCheckSvg, StyledSaveSvg } from "./Card.styled";
-
+import {formatJustDateToWord } from "helpers/formatJustDate";
+import {ReactComponent as FireSvg} from '../../../images/fire.svg'
 export const Card = ({ card, handleEditing, editId }) => {
     const {  _id, title, difficulty,time, date, category, type} = card;
     const [isEditing, setIsEditing] = useState(false);
@@ -71,8 +72,7 @@ const day = String(values.selectDate.getDate()).padStart(2, '0');
   hour: '2-digit',
   minute: '2-digit',
         });
-        console.log(values.selectDate)
-        console.log(formattedTime)
+        
       const { taskInput, selectLevel,selectType } = values;
       const newCard = {
         title: taskInput,
@@ -84,7 +84,36 @@ const day = String(values.selectDate.getDate()).padStart(2, '0');
       }
         dispatch(editCardThunk({ _id, newCard }));
        
-}
+    }
+    
+  const [timeRemaining, setTimeRemaining] = useState(null);
+useEffect(() => {
+    const intervalId = setInterval(() => {
+      const current_time = new Date();
+      const time_difference = new Date(date) - current_time;
+      const seconds_remaining = Math.floor(time_difference / 1000);
+console.log(seconds_remaining)
+      if (seconds_remaining < 2 * 60 * 60) {
+    
+        setTimeRemaining(true);
+      } else {
+      
+        setTimeRemaining(false);
+      }
+    }, 100000); 
+
+    return () => clearInterval(intervalId); 
+  }, [date]);
+
+
+
+
+
+
+
+
+
+
     return (
         <StyledLi onClick={() => {
             if (editStatus && _id === editId) return;
@@ -98,8 +127,11 @@ const day = String(values.selectDate.getDate()).padStart(2, '0');
                     <span className='difficulty' ><span className='circle' style={{ backgroundColor: colorDiff }}></span>{difficulty}</span>
                     <span className='category' style={{ backgroundColor: categoryBackgroundColor }}>{category}</span>
                     <div className='infoblock'>
+                         <div>
+    </div>
                         <p className='title'>{title}</p>
-                        <p className='date-time'>{`${date}, ${time}`}</p>
+                        <p className='date-time'>{`${formatJustDateToWord(date)}, ${time}`} {timeRemaining !== null && timeRemaining ? <FireSvg/>: <></>}</p>
+                        {/* <p className='date-time'>{`${date}, ${time}`}</p> */}
                     </div>
                 </> :
                 <Formik
