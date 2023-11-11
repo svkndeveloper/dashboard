@@ -17,8 +17,9 @@ export const LoginPage = () => {
  transitions(
           (styles, item) =>
          item && (
-       <animated.div style={{ ...styles, overflowY: 'hidden' }}>
+       <animated.div style={{ ...styles, overflow: 'hidden', height: "100vh" }}>
             <StyledMainDiv >
+              <div className='backgrounds-div'></div>
         <RegisterLoginBase/>
             <LoginForm />
                  </StyledMainDiv>

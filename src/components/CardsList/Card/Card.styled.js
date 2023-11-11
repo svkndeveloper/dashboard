@@ -11,6 +11,7 @@ export const StyledSaveSvg = styled(SaveSvg)`
 `
 
 export const StyledLi = styled.li`
+background-color: #fff;
 position:relative;
 width: 224px;
 height: 208px;
