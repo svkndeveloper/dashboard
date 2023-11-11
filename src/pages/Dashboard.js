@@ -24,13 +24,12 @@ export const Dashboard = () => {
     leave: { opacity: 0, transform: 'translateX(100%)' },
     delay: 250,
   })
-    return (
-        transitions(
-          (styles, item) =>
-         item && (
-                    <animated.div style={styles}>
-                        <div>
-            <h1>My dashboard</h1>
+  return (
+    transitions(
+      (styles, item) =>
+        item && (
+          <animated.div style={{ ...styles, overflowY: 'hidden'}}>
+                             <h1>My dashboard</h1>
             {showModal && <ModalNewTask handleCloseModal={handleCloseModal} />}
             <CardList/>
             <button type="button" onClick={()=>dispatch(logOut())}>Log Out</button>
@@ -38,8 +37,7 @@ export const Dashboard = () => {
                 setShowModal(true)
                 dispatch(pickCardType('Task'))
                             }} />
-                            </div>
-                    </animated.div>
+                                        </animated.div>
          ))
     )
 }

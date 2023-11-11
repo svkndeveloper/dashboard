@@ -17,7 +17,7 @@ export const RegisterPage = () => {
         transitions(
           (styles, item) =>
          item && (
-        <animated.div style={styles}>
+        <animated.div style={{ ...styles, overflowY: 'hidden' }}>
                        <StyledMainDiv>
         <RegisterLoginBase/>
               <RegistrationForm/>

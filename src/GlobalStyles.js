@@ -17,6 +17,7 @@ html {
     scrollbar-color: #FF851C;
 }
 body {
+  overflow-x: hidden;
   background: #fff;
  }
 
