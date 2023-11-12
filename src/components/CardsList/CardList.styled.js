@@ -55,6 +55,11 @@ transition: all 250ms linear;
     // border-bottom: 1px dashed #B9C3C8;
     background-image: repeating-linear-gradient(to right, transparent, transparent 4px, #B9C3C8 6px, #B9C3C8 12px);
 }
+.dayname-text-hide:hover::after {
+    content: "";
+   
+    background-image: repeating-linear-gradient(to right, transparent, transparent 4px, #00D7FF 6px, #00D7FF 12px);
+}
 
 
 .dayname-text:not(:first-child) {

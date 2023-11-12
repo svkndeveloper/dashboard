@@ -27,13 +27,14 @@ const cardsSlice = createSlice({
     state.isLoading = true; 
     })
             .addCase(completeCardThunk.fulfilled, (state, action) => {
+                console.log(action)
                 state.doneCards = [action.payload.completedCard, ...state.doneCards]
                 state.cards = state.cards.filter(item=>item._id !== action.payload.completedCard._id )
                 state.isLoading = false;
                 state.error = null;
                      })
             .addCase(completeCardThunk.rejected, (state, action) => {
-               
+               console.log(action)
          state.isLoading = false;
       state.error = action.payload;
             })
@@ -95,8 +96,8 @@ const cardsSlice = createSlice({
       state.isLoading = false;
                 state.error = null;
                 console.log(action.payload)
-                state.cards = state.cards.filter(item=>item._id !== action.payload)
-             
+                state.cards = state.cards.filter(item => item.status === 'Incomplete' && item._id !== action.payload);
+                state.doneCards = state.doneCards.filter(item => item.status === 'Complete' && item._id !== action.payload);
             })
             .addCase(deleteCardThunk.rejected, (state, action) => {
                 console.log(action.payload)

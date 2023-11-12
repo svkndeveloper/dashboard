@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect, useRef } from 'react';
 import { getCardsThunk } from 'redux/cards/operations';
 import { Card } from './Card/Card';
+import { DoneCard } from "./DoneCard/DoneCard";
 import {
   StyledCardList,
   StyledMainDiv,
@@ -92,7 +93,7 @@ export const CardList = ({ children }) => {
         className="dayname-text dayname-text-hide"
         onClick={() => setShowTomorrowCards(!showTomorrowCards)}
       >
-        Tommorrow <StyledTommorowSvg $tomorrowcards={showTomorrowCards} />
+        Tommorrow {tomorrowCards.length > 0 && <StyledTommorowSvg $tomorrowcards={showTomorrowCards} />}
       </p>
       <CSSTransition
         in={showTomorrowCards}
@@ -117,7 +118,7 @@ export const CardList = ({ children }) => {
         className="dayname-text dayname-text-hide"
         onClick={() => setShowOtherCards(!showOtherCards)}
       >
-        Other days <StyledOtherSvg $othercards={showOtherCards} />
+        Other days {otherCards.length > 0 && <StyledOtherSvg $othercards={showOtherCards} />}
       </p>
       <CSSTransition
         in={showOtherCards}
@@ -143,7 +144,7 @@ export const CardList = ({ children }) => {
         onClick={() => setDoneCards(!showDoneCards)}
       >
         DONE
-        <StyledDoneSvg $doneCards={showDoneCards} />
+        {doneCards.length > 0 && <StyledDoneSvg $doneCards={showDoneCards} />}
       </p>
       <CSSTransition
         in={showDoneCards}
@@ -155,7 +156,7 @@ export const CardList = ({ children }) => {
         <StyledCardList ref={nodeRef3}>
           {doneCards.length > 0 &&
             doneCards.map(card => (
-              <Card
+              <DoneCard
                 key={card._id}
                 card={card}
                 handleEditing={handleEditing}

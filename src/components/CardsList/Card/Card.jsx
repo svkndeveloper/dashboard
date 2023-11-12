@@ -12,15 +12,20 @@ import { StyledCheckSvg, StyledSaveSvg ,StyledStarSvgBlue} from "./Card.styled";
 import {formatJustDateToWord } from "helpers/formatJustDate";
 import { ReactComponent as FireSvg } from '../../../images/fire.svg';
 import { useTimeRemaining, useCheckOvertime, getDifficultyColor, getCategoryBackgroundColor } from "helpers/hooks";
+import { ModalDelete } from "../ModalDelete/ModalDelete";
+
 export const Card = ({ card, handleEditing, editId }) => {
     const {  _id, title, difficulty,time, date, category, type} = card;
   const [isEditing, setIsEditing] = useState(false);
-  const [starHovered, setStarHovered] = useState(false);
+    const [starHovered, setStarHovered] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
      const editStatus = useSelector(state => state.cards.editStatus);
     const dispatch = useDispatch();
   const timeRemaining = useTimeRemaining(date, time);
   const overtimed = useCheckOvertime(date, time);
-
+    const handleCloseModal = () => {
+    setShowDeleteModal(false)
+}
    useEffect(() => {
         if (editId !== _id) {
         setIsEditing(false)
@@ -81,14 +86,9 @@ const day = String(values.selectDate.getDate()).padStart(2, '0');
                     <span className='difficulty' ><span className='circle' style={{ backgroundColor: colorDiff }}></span>{difficulty}</span>
                     <span className='category' style={{ backgroundColor: categoryBackgroundColor }}>{category}</span>
             <div className='infoblock'>
-              <div>
-              
-    </div>
               <p className='title'>{title}</p>
                         <p className={`date-time ${overtimed ? 'overtimed-date-time' : ''}`}>{overtimed ? 'Failed' : `${formatJustDateToWord(date)}, ${time}`} {timeRemaining !== null && timeRemaining ? <FireSvg/>: <></>}</p>
-              {/* <p className='date-time'>{`${date}, ${time}`}</p> */}
-            
-                    </div>
+                                </div>
                 </> :
                 <Formik
                     onSubmit={handleSubmit}
@@ -143,21 +143,27 @@ const day = String(values.selectDate.getDate()).padStart(2, '0');
                                  <button className='clear-button' type="submit"> <StyledSaveSvg /></button>
                                 <StyledLineVertSvg />
                                 <button className='clear-button' type='button' onClick={() => {
-                                    dispatch(deleteCardThunk(_id))
-                                                                 setIsEditing(false)
-        dispatch(changeEditStatus(false))
+                                    setShowDeleteModal(true)
+                                    // dispatch(deleteCardThunk(_id))
+                                    // setIsEditing(false)
+                                    // dispatch(changeEditStatus(false))
                                 }
                                 }><StyledClearSvg /></button>
                                 <StyledLineVertSvg />
                                 <button className='clear-button' type='button' onClick={() => {
                                     setIsEditing(false)
-        dispatch(changeEditStatus(false))
+                                    dispatch(changeEditStatus(false))
                                 }}><StyledCheckSvg/></button>
                                                          </div>
               <StyledStarSvg/>
                         </StyledForm>
                     )}
                 </Formik>}
+            {showDeleteModal && <ModalDelete handleCloseModal={handleCloseModal} actions={() => {
+                                    dispatch(deleteCardThunk(_id))
+                                    setIsEditing(false)
+                                    dispatch(changeEditStatus(false))
+            }} />}
         </StyledLi>
     )
 }
