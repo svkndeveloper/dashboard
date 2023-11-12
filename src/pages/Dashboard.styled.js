@@ -70,14 +70,4 @@ overflow:hidden;
     padding: 28px 16px;  
 }
 
-.dayname-text {
-    color: #282828;
-font-family: Roboto;
-font-size: 15px;
-font-style: normal;
-font-weight: 300;
-line-height: normal;
-letter-spacing: 0.3px;
-margin-bottom: 18px;
-}
 `

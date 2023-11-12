@@ -129,7 +129,7 @@ transition: all 300ms linear;
  
 }
 .react-datepicker-popper{
-  transform: translate3d(24px, 130px,0) !important;
+  transform: translate3d(-25px, 130px,0) !important;
  
 }
 .react-datepicker__navigation--next--with-time:not(.react-datepicker__navigation--next--with-today-button) {

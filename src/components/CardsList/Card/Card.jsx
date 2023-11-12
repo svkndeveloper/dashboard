@@ -15,9 +15,38 @@ import { ReactComponent as FireSvg } from '../../../images/fire.svg';
 export const Card = ({ card, handleEditing, editId }) => {
     const {  _id, title, difficulty,time, date, category, type} = card;
     const [isEditing, setIsEditing] = useState(false);
-     const [timeRemaining, setTimeRemaining] = useState(null);
+    const [timeRemaining, setTimeRemaining] = useState(null);
+    const [overtimed, setOvertimed] = useState(false);
     const editStatus = useSelector(state => state.cards.editStatus);
     const dispatch = useDispatch();
+  
+    
+  useEffect(() => {
+  const targetTime = new Date(date);
+  const [targetHours, targetMinutes] = time.split(":");
+  targetTime.setHours(Number(targetHours), Number(targetMinutes), 0);
+  const currentTime = new Date();
+      const isEarlier =
+         currentTime.getHours() > targetTime.getHours() || (
+    currentTime.getHours() > targetTime.getHours() &&
+      currentTime.getMinutes() > targetTime.getMinutes());
+  const isToday =
+    currentTime.getDate() === targetTime.getDate() &&
+    currentTime.getMonth() === targetTime.getMonth() &&
+    currentTime.getFullYear() === targetTime.getFullYear();
+  if (isEarlier && isToday) {
+    setOvertimed(true);
+  } else {
+    setOvertimed(false);
+  }
+
+}, [overtimed, time, date]);
+
+
+
+
+
+    
 
     useEffect(() => {
         if (editId !== _id) {
@@ -109,7 +138,10 @@ const day = String(values.selectDate.getDate()).padStart(2, '0');
 }, [date, time]);
 
     return (
-        <StyledLi onClick={() => {
+        <StyledLi
+            
+            style={{backgroundColor: overtimed === true ? 'red' : ''}}
+            onClick={() => {
             if (editStatus && _id === editId) return;
             handleEditing(_id)
             setIsEditing(!isEditing)

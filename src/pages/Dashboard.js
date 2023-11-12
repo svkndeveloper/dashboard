@@ -42,15 +42,14 @@ export const Dashboard = () => {
                 <StyledLogoutButton type="button" onClick={() => dispatch(logOut())}>
                   <StyledLogoutSvg/>
                 </StyledLogoutButton>
-                
-              </StyledHeaderContainer>
-              
+                              </StyledHeaderContainer>
             </StyledHeader>
+            
             <StyledMainDiv>
              <StyledContainer>
              
             {/* {showModal && <ModalNewTask handleCloseModal={handleCloseModal} />} */}
-                <animated.div style={{ ...styles, positio: 'absolute', width: '100%', overflowX: 'hidden', minHeight: '90vh' }}>
+                <animated.div style={{ ...styles, width: '100%', overflowX: '', minHeight: '90vh' }}>
                   <CardList>
                     {showModal && <ModalNewTask handleCloseModal={handleCloseModal} />}
             </CardList>

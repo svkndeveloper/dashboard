@@ -1,17 +1,22 @@
 import { useDispatch, useSelector } from "react-redux"
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { getCardsThunk } from "redux/cards/operations";
 import { Card } from "./Card/Card";
-import { StyledCardList } from "./CardList.styled";
+import { StyledCardList,StyledMainDiv,StyledOtherSvg,StyledTommorowSvg} from "./CardList.styled";
 import { compareTime } from "helpers/timeSorter";
-
+import { CSSTransition } from "react-transition-group";
+import '../App.css';
 export const CardList = ({children}) => {
     const cards = useSelector(state => state.cards.cards)
     const [otherCards,setOtherCards] = useState([]);
     const [todayCards, setTodayCards] = useState([]);
-    const [tomorrowCards, setTomorrowCards] = useState([]);
+  const [tomorrowCards, setTomorrowCards] = useState([]);
+  const [showTomorrowCards, setShowTomorrowCards] = useState(false);
+   const [showOtherCards, setShowOtherCards] = useState(false);
     const [editId, setEditId] = useState(null);
     const dispatch = useDispatch();
+  const nodeRef = useRef(null);
+   const nodeRef2 = useRef(null);
      useEffect(() => {
        dispatch(getCardsThunk()) 
      }, [dispatch])
@@ -52,25 +57,42 @@ const tomFilteredData = cards.filter(item => {
     setEditId(id)
 }
     return (
-        <>
-            <p className='dayname-text'>Today</p>
+        <StyledMainDiv>
+        <p className='dayname-text' >Today</p>
+        
         <StyledCardList>
             {children}
             {/* {cards.length > 0 && cards.map(card => <Card key={card._id} card={card} handleEditing={handleEditing} editId={editId} />)} */}
             
             {todayCards.length > 0 && todayCards.map(card => <Card key={card._id} card={card} handleEditing={handleEditing} editId={editId} />)}
-          
-            </StyledCardList>
-             <p className='dayname-text'>Tommorrow</p>
-             <StyledCardList>
-            
-            {tomorrowCards.length > 0 && tomorrowCards.map(card => <Card key={card._id} card={card} handleEditing={handleEditing} editId={editId} />)}
-            </StyledCardList>
-            <p className='dayname-text'>Other days</p>
-             <StyledCardList>
+          </StyledCardList>
+       
+        
+             <p className='dayname-text dayname-text-hide' onClick={()=>setShowTomorrowCards(!showTomorrowCards)}>Tommorrow <StyledTommorowSvg $tomorrowcards={showTomorrowCards }/></p>
+              <CSSTransition
+        in={showTomorrowCards}
+        nodeRef={nodeRef}
+        timeout={300}
+        classNames="cards"
+        unmountOnExit
+             >
+             <StyledCardList ref={nodeRef}>
+             {tomorrowCards.length > 0 && tomorrowCards.map(card => <Card key={card._id} card={card} handleEditing={handleEditing} editId={editId} />)}
+          </StyledCardList>
+          </CSSTransition>
+        <p className='dayname-text dayname-text-hide' onClick={() => setShowOtherCards(!showOtherCards)}>Other days <StyledOtherSvg $othercards={showOtherCards } /></p>
+         <CSSTransition
+        in={showOtherCards}
+        nodeRef={nodeRef2}
+        timeout={300}
+        classNames="cards"
+        unmountOnExit
+             >
+          <StyledCardList ref={nodeRef2}>
             
             {otherCards.length > 0 && otherCards.map(card => <Card key={card._id} card={card} handleEditing={handleEditing} editId={editId} />)}
-            </StyledCardList>
-            </>
+          </StyledCardList>
+          </CSSTransition>
+            </StyledMainDiv>
     )
 }
