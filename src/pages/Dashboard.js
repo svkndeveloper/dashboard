@@ -50,7 +50,7 @@ export const Dashboard = () => {
              <StyledContainer>
              
             {/* {showModal && <ModalNewTask handleCloseModal={handleCloseModal} />} */}
-                <animated.div style={{ ...styles, positio: 'absolute', width: '100%', overflowX: 'hidden', minHeight: '50vh' }}>
+                <animated.div style={{ ...styles, positio: 'absolute', width: '100%', overflowX: 'hidden', minHeight: '90vh' }}>
                   <CardList>
                     {showModal && <ModalNewTask handleCloseModal={handleCloseModal} />}
             </CardList>
