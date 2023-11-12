@@ -13,7 +13,7 @@ export const Dashboard = () => {
   const [showModal, setShowModal] = useState(false);
   const currentUser = useSelector(state => state.auth.currentUser);
   const userEmail = useSelector(state => state.auth.isLoggedIn);
-  console.log(userEmail)
+
     const handleCloseModal = () => {
         setShowModal(false)
     }
@@ -48,9 +48,9 @@ export const Dashboard = () => {
             </StyledHeader>
             <StyledMainDiv>
              <StyledContainer>
-                                      <p className='dayname-text'>Today</p>
+             
             {/* {showModal && <ModalNewTask handleCloseModal={handleCloseModal} />} */}
-                <animated.div style={{ ...styles, positio: 'absolute', width: '100%', overflowX: 'hidden' }}>
+                <animated.div style={{ ...styles, positio: 'absolute', width: '100%', overflowX: 'hidden', minHeight: '50vh' }}>
                   <CardList>
                     {showModal && <ModalNewTask handleCloseModal={handleCloseModal} />}
             </CardList>

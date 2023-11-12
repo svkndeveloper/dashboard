@@ -18,7 +18,7 @@ export const Card = ({ card, handleEditing, editId }) => {
      const [timeRemaining, setTimeRemaining] = useState(null);
     const editStatus = useSelector(state => state.cards.editStatus);
     const dispatch = useDispatch();
-   
+
     useEffect(() => {
         if (editId !== _id) {
         setIsEditing(false)
@@ -87,27 +87,26 @@ const day = String(values.selectDate.getDate()).padStart(2, '0');
         dispatch(editCardThunk({ _id, newCard }));
        
     }
+
     
- 
-useEffect(() => {
-    const checkTimeAndSetRemaining = () => {
-      const current_time = new Date();
-      const time_difference = new Date(date) - current_time;
-      const seconds_remaining = Math.floor(time_difference / 1000);
-
-      console.log(seconds_remaining);
-
-      if (seconds_remaining < 2 * 60 * 60) {
-        setTimeRemaining(true);
-      } else {
-        setTimeRemaining(false);
-      }
-    };
-    checkTimeAndSetRemaining();
-    const intervalId = setInterval(checkTimeAndSetRemaining, 100000);
-    return () => clearInterval(intervalId);
-  }, [date]);
-
+    useEffect(() => {
+  const checkTimeAndSetRemaining = () => {
+    const current_time = new Date();
+    const [hours, minutes] = time.split(':').map(part => parseInt(part, 10));
+    const currentDate = new Date(date);
+    currentDate.setHours(hours, minutes, 0, 0);
+    const time_difference = currentDate - current_time;
+    const seconds_remaining = Math.floor(time_difference / 1000);
+    if (seconds_remaining < 2 * 60 * 60) {
+      setTimeRemaining(true);
+    } else {
+      setTimeRemaining(false);
+    }
+  };
+  checkTimeAndSetRemaining();
+  const intervalId = setInterval(checkTimeAndSetRemaining, 100000);
+  return () => clearInterval(intervalId);
+}, [date, time]);
 
     return (
         <StyledLi onClick={() => {

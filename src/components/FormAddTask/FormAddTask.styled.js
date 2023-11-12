@@ -143,6 +143,7 @@ transition: all 300ms linear;
 }
 .react-datepicker__day-name {
    color:#fff; 
+   width: 20px;
 }  
 .react-datepicker__header {
    background-color:#00D7FF; 
