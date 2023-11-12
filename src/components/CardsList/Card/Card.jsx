@@ -19,7 +19,8 @@ export const Card = ({ card, handleEditing, editId }) => {
   const [isEditing, setIsEditing] = useState(false);
     const [starHovered, setStarHovered] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
-     const editStatus = useSelector(state => state.cards.editStatus);
+    const editStatus = useSelector(state => state.cards.editStatus);
+    const cards = useSelector(state => state.cards.cards);
     const dispatch = useDispatch();
   const timeRemaining = useTimeRemaining(date, time);
   const overtimed = useCheckOvertime(date, time);
@@ -64,106 +65,108 @@ const day = String(values.selectDate.getDate()).padStart(2, '0');
    
 
     return (
-        <StyledLi
-            $overtimed={overtimed.toString()}
-        onClick={() => {
-          if (overtimed) {
-                  return dispatch(deleteCardThunk(_id))
+       cards.length > 0 && <StyledLi
+                $overtimed={overtimed.toString()}
+                onClick={() => {
+                    if (overtimed) {
+                        return dispatch(deleteCardThunk(_id))
+                    }
+                    if (editStatus && _id === editId) return;
+                    if (starHovered) return;
+                    handleEditing(_id)
+                    setIsEditing(!isEditing)
+                    dispatch(changeEditStatus(true))
                 }
-              if (editStatus && _id === editId) return;
-              if (starHovered) return;
-            handleEditing(_id)
-            setIsEditing(!isEditing)
-            dispatch(changeEditStatus(true))
-        }
-        }>
-            {!isEditing ?
-          <>
-            <StyledStarSvgBlue
-              onMouseEnter={() => setStarHovered(true)}
-               onMouseLeave={()=>setStarHovered(false)}
-              onClick={() => dispatch(completeCardThunk(_id))} />
-                    <span className='difficulty' ><span className='circle' style={{ backgroundColor: colorDiff }}></span>{difficulty}</span>
-                    <span className='category' style={{ backgroundColor: categoryBackgroundColor }}>{category}</span>
-            <div className='infoblock'>
-              <p className='title'>{title}</p>
-                        <p className={`date-time ${overtimed ? 'overtimed-date-time' : ''}`}>{overtimed ? 'Failed' : `${formatJustDateToWord(date)}, ${time}`} {timeRemaining !== null && timeRemaining ? <FireSvg/>: <></>}</p>
-                                </div>
-                </> :
-                <Formik
-                    onSubmit={handleSubmit}
-                    initialValues={{
-                        selectLevel: difficulty,
-                        selectType: category,
-                        taskInput: '',
-                        selectDate: new Date(`${date}T${time}`),
-                    }}
+                }>
+                {!isEditing ?
+                    <>
+                        <StyledStarSvgBlue
+                            onMouseEnter={() => setStarHovered(true)}
+                            onMouseLeave={() => setStarHovered(false)}
+                            onClick={() => dispatch(completeCardThunk(_id))} />
+                        <span className='difficulty' ><span className='circle' style={{ backgroundColor: colorDiff }}></span>{difficulty}</span>
+                        <span className='category' style={{ backgroundColor: categoryBackgroundColor }}>{category}</span>
+                        <div className='infoblock'>
+                            <p className='title'>{title}</p>
+                            <p className={`date-time ${overtimed ? 'overtimed-date-time' : ''}`}>{overtimed ? 'Failed' : `${formatJustDateToWord(date)}, ${time}`} {timeRemaining !== null && timeRemaining ? <FireSvg /> : <></>}</p>
+                        </div>
+                    </> :
+                    <Formik
+                        onSubmit={handleSubmit}
+                        initialValues={{
+                            selectLevel: difficulty,
+                            selectType: category,
+                            taskInput: '',
+                            selectDate: new Date(`${date}T${time}`),
+                        }}
      
-                >
-                    {({ values, setFieldValue }) => (
-                        <StyledForm>
-                            <Field className='select-level' name="selectLevel">
-                                {({ field }) => (
-                                    <SelectLevel
-                                        {...field}
+                    >
+                        {({ values, setFieldValue }) => (
+                            <StyledForm>
+                                <Field className='select-level' name="selectLevel">
+                                    {({ field }) => (
+                                        <SelectLevel
+                                            {...field}
                                 
-                                        currentValue={values.selectLevel}
-                                        dataFunc={option =>
-                                            setFieldValue('selectLevel', option.value)
-                                        }
-                                    />
-                                )}
-                            </Field>
-                            <Field name="selectType">
-                                {({ field }) => (
-                                    <SelectType
-                                        {...field}
-                                        currentValue={values.selectType}
-                                        dataFunc={option =>
-                                            setFieldValue('selectType', option.value)
-                                        }
-                                    />
-                                )}
-                            </Field>
-                            <div className='addtask-name-block'>
-                                <label className='task-label' htmlFor="taskInput">Edit Quest</label>
-                                <Field type="text" name="taskInput" id="taskInput" required />
-                            </div>
-                            <Field name="selectDate">
-                                {({ field }) => (
-                                    <DatePickerTask
-                                        {...field}
-                                        value={values}
-                                        dataFunc={(date) => setFieldValue('selectDate', date)}
+                                            currentValue={values.selectLevel}
+                                            dataFunc={option =>
+                                                setFieldValue('selectLevel', option.value)
+                                            }
+                                        />
+                                    )}
+                                </Field>
+                                <Field name="selectType">
+                                    {({ field }) => (
+                                        <SelectType
+                                            {...field}
+                                            currentValue={values.selectType}
+                                            dataFunc={option =>
+                                                setFieldValue('selectType', option.value)
+                                            }
+                                        />
+                                    )}
+                                </Field>
+                                <div className='addtask-name-block'>
+                                    <label className='task-label' htmlFor="taskInput">Edit Quest</label>
+                                    <Field type="text" name="taskInput" id="taskInput" required />
+                                </div>
+                                <Field name="selectDate">
+                                    {({ field }) => (
+                                        <DatePickerTask
+                                            {...field}
+                                            value={values}
+                                            dataFunc={(date) => setFieldValue('selectDate', date)}
                                
-                                    />
-                                )}
-                            </Field>
-                            <div className='btns-block'>
-                                 <button className='clear-button' type="submit"> <StyledSaveSvg /></button>
-                                <StyledLineVertSvg />
-                                <button className='clear-button' type='button' onClick={() => {
-                                    setShowDeleteModal(true)
-                                    // dispatch(deleteCardThunk(_id))
-                                    // setIsEditing(false)
-                                    // dispatch(changeEditStatus(false))
-                                }
-                                }><StyledClearSvg /></button>
-                                <StyledLineVertSvg />
-                                <button className='clear-button' type='button' onClick={() => {
-                                    setIsEditing(false)
-                                    dispatch(changeEditStatus(false))
-                                }}><StyledCheckSvg/></button>
-                                                         </div>
-              <StyledStarSvg/>
-                        </StyledForm>
-                    )}
-                </Formik>}
-            {showDeleteModal && <ModalDelete handleCloseModal={handleCloseModal} actions={() => {
-                                    dispatch(deleteCardThunk(_id))
-                                    setIsEditing(false)
-                                    dispatch(changeEditStatus(false))
-            }} />}
-        </StyledLi>
+                                        />
+                                    )}
+                                </Field>
+                                <div className='btns-block'>
+                                    <button className='clear-button' type="submit"> <StyledSaveSvg /></button>
+                                    <StyledLineVertSvg />
+                                    <button className='clear-button' type='button' onClick={() => {
+                                        setShowDeleteModal(true)
+                                        // dispatch(deleteCardThunk(_id))
+                                        // setIsEditing(false)
+                                        // dispatch(changeEditStatus(false))
+                                    }
+                                    }><StyledClearSvg /></button>
+                                    <StyledLineVertSvg />
+                                    <button className='clear-button' type='button' onClick={() => {
+                                        setIsEditing(false)
+                                        dispatch(changeEditStatus(false))
+                                    }}><StyledCheckSvg /></button>
+                                </div>
+                                <StyledStarSvg />
+                            </StyledForm>
+                        )}
+                    </Formik>}
+                {showDeleteModal && <ModalDelete handleCloseModal={handleCloseModal} _id={_id} actions={() => {
+                    // dispatch(deleteCardThunk(_id))
+                    setShowDeleteModal(false)
+                    setIsEditing(false)
+                    dispatch(changeEditStatus(false))
+                }} />}
+            </StyledLi>
+        
     )
 }

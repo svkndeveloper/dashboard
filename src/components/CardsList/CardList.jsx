@@ -93,7 +93,7 @@ export const CardList = ({ children }) => {
         className="dayname-text dayname-text-hide"
         onClick={() => setShowTomorrowCards(!showTomorrowCards)}
       >
-        Tommorrow {tomorrowCards.length > 0 && <StyledTommorowSvg $tomorrowcards={showTomorrowCards} />}
+        Tommorrow {tomorrowCards.length > 0 && cards.length > 0 && <StyledTommorowSvg $tomorrowcards={showTomorrowCards} />}
       </p>
       <CSSTransition
         in={showTomorrowCards}
@@ -103,7 +103,7 @@ export const CardList = ({ children }) => {
         unmountOnExit
       >
         <StyledCardList ref={nodeRef}>
-          {tomorrowCards.length > 0 &&
+          {tomorrowCards.length > 0 && 
             tomorrowCards.map(card => (
               <Card
                 key={card._id}
@@ -118,7 +118,7 @@ export const CardList = ({ children }) => {
         className="dayname-text dayname-text-hide"
         onClick={() => setShowOtherCards(!showOtherCards)}
       >
-        Other days {otherCards.length > 0 && <StyledOtherSvg $othercards={showOtherCards} />}
+        Other days {otherCards.length > 0 && cards.length > 0 && <StyledOtherSvg $othercards={showOtherCards} />}
       </p>
       <CSSTransition
         in={showOtherCards}

@@ -1,7 +1,7 @@
 import { StyledOverlay, StyledModal,StyledCancelButton,StyledDeleteButton,StyledQuestion,StyledButtonBlock, StyledInfoBlock } from "./ModalDelete.styled"
 import { StyledLineVertSvg } from "components/FormAddTask/FormAddTask.styled";
 import { useDispatch } from "react-redux";
-import { deleteCardThunk, getCardsThunk } from "redux/cards/operations";
+import { deleteCardThunk } from "redux/cards/operations";
 
 export const ModalDelete = ({handleCloseModal, _id,actions}) => {
     const dispatch = useDispatch();
@@ -17,7 +17,7 @@ export const ModalDelete = ({handleCloseModal, _id,actions}) => {
                         <StyledDeleteButton onClick={() => {
                             if (actions){actions()}
                              dispatch(deleteCardThunk(_id))
-                             dispatch(getCardsThunk())
+                            //  dispatch(getCardsThunk())
                         }
                         }>delete</StyledDeleteButton>
                     </StyledButtonBlock>
