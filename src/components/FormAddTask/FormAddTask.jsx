@@ -1,22 +1,18 @@
 import { Formik, Field } from 'formik';
 import { SelectLevel } from 'components/ReactSelect/SelectLevel';
 import { SelectType } from 'components/ReactSelect/SelectType';
-import { StyledForm, StyledClearSvg, StyledLineVertSvg } from './FormAddTask.styled';
+import { StyledForm, StyledClearSvg, StyledLineVertSvg,StyledStarSvg } from './FormAddTask.styled';
 import { DatePickerTask } from 'components/DatePicker/DatePickerTask';
 import { useDispatch} from 'react-redux';
 import { addCardThunk } from 'redux/cards/operations';
 
-const levelDefault = 'Normal';
-const typeDefault = 'Stuff';
 
 export const FormAddTask = ({handleCloseModal}) => {
   // const cardType = useSelector(state => state.cards.cardType);
   const dispatch = useDispatch();
  
-
     const handleSubmit = (values, { resetForm } )=> {
-        
-                if (!values.selectDate) {
+                        if (!values.selectDate) {
             return alert('оберіть дату');
           }
  const year = values.selectDate.getFullYear();
@@ -36,8 +32,7 @@ const day = String(values.selectDate.getDate()).padStart(2, '0');
         time: formattedTime,
         type: 'Task'
       }
-   
-      dispatch(addCardThunk(newCard))
+         dispatch(addCardThunk(newCard))
       handleCloseModal()
       resetForm();
     };
@@ -45,8 +40,8 @@ const day = String(values.selectDate.getDate()).padStart(2, '0');
      <Formik
           onSubmit={handleSubmit}
           initialValues={{
-              selectLevel: levelDefault,
-              selectType: typeDefault,
+              selectLevel: 'Normal',
+              selectType: 'Stuff',
               taskInput: '',
               selectDate: null,
             }}
@@ -96,7 +91,7 @@ const day = String(values.selectDate.getDate()).padStart(2, '0');
               <StyledLineVertSvg/>
               <button className='start-button' type="submit">START</button>
             </div>
-              
+              <StyledStarSvg/>
             </StyledForm>
           )}
         </Formik>

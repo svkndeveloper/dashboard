@@ -13,6 +13,12 @@ height: 14px;
 transform: ${({ $tomorrowcards }) => ($tomorrowcards ? 'rotate(180deg)' : 'none')};
 `
 
+export const StyledDoneSvg = styled(ArrowSvg)`
+width:14px;
+height: 14px;
+transform: ${({ $doneCards }) => ($doneCards ? 'rotate(180deg)' : 'none')};
+`
+
 export const StyledMainDiv = styled.div`
 
 .dayname-text {

@@ -2,6 +2,13 @@ import { styled } from "styled-components";
 import { Form } from 'formik';
 import { ReactComponent as ClearSvg } from '../../images/clear.svg';
 import {ReactComponent as LineVertSvg} from '../../images/linevert.svg'
+import { ReactComponent as StarSvg } from '../../images/star.svg';
+
+export const StyledStarSvg = styled(StarSvg)`
+position:absolute;
+top:20px;
+right: 20px;
+`
 
 export const StyledClearSvg = styled(ClearSvg)`
 transition: all 300ms linear;

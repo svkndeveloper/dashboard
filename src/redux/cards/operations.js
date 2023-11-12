@@ -54,3 +54,17 @@ export const deleteCardThunk = createAsyncThunk(
     }
   }
 );
+
+export const completeCardThunk = createAsyncThunk(
+  "cards/completeCard",
+  async (_id, thunkAPI) => {
+    try {
+      const {data} = await axios.patch(`/card/complete/${_id}`);
+      
+        return data;
+    } catch (e) {
+      
+              return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);

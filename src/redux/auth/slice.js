@@ -45,6 +45,7 @@ const authSlice = createSlice({
        state.pending = false;
     })
       .addCase(logIn.rejected, (state, action) => {
+        console.log(action)
         state.error = action.payload;
         state.pending = false;
     })

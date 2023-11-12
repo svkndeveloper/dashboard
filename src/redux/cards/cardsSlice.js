@@ -1,11 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addCardThunk,getCardsThunk,editCardThunk,deleteCardThunk } from './operations';
+import { addCardThunk,getCardsThunk,editCardThunk,deleteCardThunk,completeCardThunk } from './operations';
 const initialState = {
     cardType: null,
     cards: [],
     error: null,
     isLoading: null,
     editStatus: false,
+    doneCards: [],
    
 }
 
@@ -13,8 +14,7 @@ const cardsSlice = createSlice({
     name: 'cards',
     initialState,
     reducers: {
-      
-        pickCardType(state, action) {
+           pickCardType(state, action) {
            state.cardType = action.payload
         },
         changeEditStatus(state, action) {
@@ -22,7 +22,22 @@ const cardsSlice = createSlice({
         }
     },
     extraReducers: builder =>
-    builder.addCase(addCardThunk.pending, (state) => {
+        builder
+            .addCase(completeCardThunk.pending, (state) => {
+    state.isLoading = true; 
+    })
+            .addCase(completeCardThunk.fulfilled, (state, action) => {
+                state.doneCards = [action.payload.completedCard, ...state.doneCards]
+                state.cards = state.cards.filter(item=>item._id !== action.payload.completedCard._id )
+                state.isLoading = false;
+                state.error = null;
+                     })
+            .addCase(completeCardThunk.rejected, (state, action) => {
+               
+         state.isLoading = false;
+      state.error = action.payload;
+            })
+            .addCase(addCardThunk.pending, (state) => {
     state.isLoading = true; 
     })
             .addCase(addCardThunk.fulfilled, (state, action) => {
@@ -41,10 +56,10 @@ const cardsSlice = createSlice({
     state.isLoading = true; 
     })
             .addCase(getCardsThunk.fulfilled, (state, action) => {
-              
-        state.isLoading = false;
-      state.error = null;
-      state.cards = action.payload.cards;
+      state.isLoading = false;
+                state.error = null;
+                state.cards = action.payload.cards.filter(item => item.status === 'Incomplete');
+             state.doneCards = action.payload.cards.filter(item=>item.status === 'Complete');
             })
             .addCase(getCardsThunk.rejected, (state, action) => {
                 

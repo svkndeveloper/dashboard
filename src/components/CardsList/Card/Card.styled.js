@@ -1,6 +1,21 @@
 import { styled } from "styled-components";
 import { ReactComponent as CheckSvg } from '../../../images/check.svg'
 import {ReactComponent as SaveSvg} from '../../../images/save.svg'
+import { ReactComponent as StarSvg } from '../../../images/star.svg'
+
+export const StyledStarSvgBlue = styled(StarSvg)`
+position:absolute;
+top:20px;
+right: 20px;
+cursor: pointer;
+transition: transform 0.5s ease;
+& path {
+    fill:#00D7FF;
+}
+&:hover {
+    transform: scale(1.4) rotate(360deg);
+}
+`
 
 export const StyledCheckSvg = styled(CheckSvg)`
 
@@ -17,7 +32,42 @@ width: 280px;
 height: 260px;
 border: 1px solid #B9C3C8;
 border-radius: 13px;
+cursor: pointer;
+transition: box-shadow 0.3s ease;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
+ ${({ $overtimed }) =>
+      $overtimed === 'true' &&
+      `
+      &:hover{
+        background-color: red;
+      }
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        height: 2px;
+        background-color: #DB0837;
+      }
+         &::before {
+        transform: rotate(45deg);
+      }
+
+      &::after {
+        transform: rotate(-45deg);
+      }
+    `}
+
+
+
+&:hover {
+  box-shadow: 0 8px 16px rgba(0, 215, 255, 0.3); 
+}
 @media screen and (min-width:768px) {
     // width: 224px;
     width: calc((100% - 32px) / 3);
@@ -26,6 +76,7 @@ height: 208px;
 @media screen and (min-width:1280px) {
     
     width: calc((100% - 128px) / 5);
+
 
 }
 
@@ -129,4 +180,10 @@ margin-top: 10px;
     letter-spacing: 0.28px;
     }
 }
+
+.date-time.overtimed-date-time{
+font-size: 30px;
+color: red;
+}
+
 `
