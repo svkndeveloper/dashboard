@@ -43,6 +43,14 @@ transition: all 250ms linear;
     position: relative;
 }
 .dayname-text-today{
+        color: #282828;
+font-family: Roboto;
+font-size: 15px;
+font-style: normal;
+font-weight: 300;
+line-height: normal;
+letter-spacing: 0.3px;
+white-space: nowrap;
 margin-bottom: 18px;
 }
 

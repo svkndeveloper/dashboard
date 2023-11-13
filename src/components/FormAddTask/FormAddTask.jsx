@@ -1,16 +1,16 @@
 import { Formik, Field } from 'formik';
 import { SelectLevel } from 'components/ReactSelect/SelectLevel';
 import { SelectType } from 'components/ReactSelect/SelectType';
-import { StyledForm, StyledClearSvg, StyledLineVertSvg,StyledStarSvg } from './FormAddTask.styled';
+import { StyledForm, StyledClearSvg, StyledLineVertSvg,StyledStarSvg, StyledTrophySvg,StyledInputField,StyledLabel } from './FormAddTask.styled';
 import { DatePickerTask } from 'components/DatePicker/DatePickerTask';
-import { useDispatch} from 'react-redux';
+import { useDispatch,useSelector} from 'react-redux';
 import { addCardThunk } from 'redux/cards/operations';
 
 
 export const FormAddTask = ({handleCloseModal}) => {
-  // const cardType = useSelector(state => state.cards.cardType);
+  const cardType = useSelector(state => state.cards.cardType);
   const dispatch = useDispatch();
- 
+
     const handleSubmit = (values, { resetForm } )=> {
                         if (!values.selectDate) {
             return alert('оберіть дату');
@@ -30,7 +30,7 @@ const day = String(values.selectDate.getDate()).padStart(2, '0');
         category: selectType,
         date: formattedDate,
         time: formattedTime,
-        type: 'Task'
+        type: cardType
       }
          dispatch(addCardThunk(newCard))
       handleCloseModal()
@@ -73,14 +73,14 @@ const day = String(values.selectDate.getDate()).padStart(2, '0');
                 )}
                     </Field>
                      <div className='addtask-name-block'>
-                    <label className='task-label' htmlFor="taskInput">Create New Quest</label>
-                    <Field type="text" name="taskInput" id="taskInput" required/>
+                    <StyledLabel $cardtype={cardType} htmlFor="taskInput">{cardType === 'Challenge' ? 'Challenge' : 'Create New Quest'}</StyledLabel>
+              <StyledInputField type="text" name="taskInput" id="taskInput" $cardtype={ cardType} required/>
                     </div>
                      <Field name="selectDate">
                 {({ field }) => (
                   <DatePickerTask
                                 {...field}
-                    value={values}
+                                 value={values}
                                 dataFunc={(date) => setFieldValue('selectDate', date)}
                                
                   />
@@ -91,7 +91,7 @@ const day = String(values.selectDate.getDate()).padStart(2, '0');
               <StyledLineVertSvg/>
               <button className='start-button' type="submit">START</button>
             </div>
-              <StyledStarSvg/>
+            {cardType === "Challenge" ? <StyledTrophySvg/> : <StyledStarSvg />}
             </StyledForm>
           )}
         </Formik>

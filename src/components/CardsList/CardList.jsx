@@ -72,13 +72,11 @@ export const CardList = ({ children }) => {
   };
   return (
     <StyledMainDiv>
-      <p className="dayname-text dayname-text-today">Today</p>
+      <p className="dayname-text-today">Today</p>
 
       <StyledCardList>
         {children}
-        {/* {cards.length > 0 && cards.map(card => <Card key={card._id} card={card} handleEditing={handleEditing} editId={editId} />)} */}
-
-        {todayCards.length > 0 &&
+         {todayCards.length > 0 &&
           todayCards.map(card => (
             <Card
               key={card._id}

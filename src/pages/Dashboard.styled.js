@@ -28,7 +28,7 @@ cursor: pointer;
 
 &:hover .first-path{
       fill: #00D7FF; 
-}
+      }
 
 &:hover .second-path{
       fill: #00D7FF; 

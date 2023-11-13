@@ -50,7 +50,10 @@ export const Dashboard = () => {
                 <p className='title'>Quesify</p>
                 <p className='first-letter'>{firstLetter}</p>
                 {isNarrowScreen && <p className='fullname-text'>{`${transformedUser}'s Quest Log`}</p>}
-                <StyledChallengeButton/>
+                <StyledChallengeButton onClick={() => {
+                setShowModal(true)
+                dispatch(pickCardType('Challenge'))
+              }} />
                                   <StyledLogoutSvg onClick={() => dispatch(logOut())}/>
                                               </StyledHeaderContainer>
             </StyledHeader>

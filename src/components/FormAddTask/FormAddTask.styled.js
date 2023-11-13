@@ -1,8 +1,44 @@
 import { styled } from "styled-components";
-import { Form } from 'formik';
+import { Form, Field } from 'formik';
 import { ReactComponent as ClearSvg } from '../../images/clear.svg';
 import {ReactComponent as LineVertSvg} from '../../images/linevert.svg'
 import { ReactComponent as StarSvg } from '../../images/star.svg';
+import { ReactComponent as TrophySvg } from '../../images/trophy.svg';
+
+export const StyledLabel = styled.label`
+    color: ${({$cardtype}) => $cardtype === 'Challenge' ? '#fff' : '#B9C3C8'};
+text-align: center;
+font-family: Roboto;
+font-size: ${({$cardtype}) => $cardtype === 'Challenge' ? '16px' : '12px'};
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+letter-spacing: 0.24px;
+text-transform: uppercase;
+
+`
+
+export const StyledInputField = styled(Field)`
+
+    margin: 0 auto;
+    width: 163px;
+    outline:none;
+    border: none;
+    color: #F99943;
+    border-bottom: 1px solid #F99943;
+    background-color: ${({$cardtype}) => $cardtype === 'Challenge' ? '#15395A' : ''};
+
+&:focus {
+    color: #00D7FF;
+    border-bottom: 1px solid #00D7FF;
+}
+`
+
+export const StyledTrophySvg = styled(TrophySvg)`
+position:absolute;
+top:20px;
+right: 20px;
+`
 
 export const StyledStarSvg = styled(StarSvg)`
 position:absolute;
@@ -65,30 +101,8 @@ transition: all 250ms linear;
     align-items center;
     gap: 5px;
 }
-#taskInput {
-    margin: 0 auto;
-    width: 163px;
-    outline:none;
-    border: none;
-    color: #F99943;
-    border-bottom: 1px solid #F99943;
-}
-#taskInput:focus {
-    color: #00D7FF;
-    border-bottom: 1px solid #00D7FF;
-}
 
-.task-label{
-    color: #B9C3C8;
-text-align: center;
-font-family: Roboto;
-font-size: 12px;
-font-style: normal;
-font-weight: 700;
-line-height: normal;
-letter-spacing: 0.24px;
-text-transform: uppercase;
-}
+
 
 .datepicker-div{
     display: flex;
@@ -108,7 +122,6 @@ cursor: pointer;
 }
 .date-span {
     cursor: pointer;
-    color: #282828;
 font-family: Roboto;
 font-size: 14px;
 font-style: normal;
