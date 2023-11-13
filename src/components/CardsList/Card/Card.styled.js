@@ -2,6 +2,18 @@ import { styled } from "styled-components";
 import { ReactComponent as CheckSvg } from '../../../images/check.svg'
 import {ReactComponent as SaveSvg} from '../../../images/save.svg'
 import { ReactComponent as StarSvg } from '../../../images/star.svg'
+import { ReactComponent as TrophySvg } from '../../../images/trophy.svg';
+
+export const StyledTrophySvgAction = styled(TrophySvg)`
+position:absolute;
+top:20px;
+right: 20px;
+cursor: pointer;
+transition: transform 0.5s ease;
+&:hover {
+    transform: scale(1.4);
+}
+`
 
 export const StyledStarSvgBlue = styled(StarSvg)`
 position:absolute;
@@ -26,7 +38,7 @@ export const StyledSaveSvg = styled(SaveSvg)`
 `
 
 export const StyledLi = styled.li`
-background-color: #fff;
+background-color: ${({$cardtype})=> $cardtype === 'Challenge' ? "#15395A" : "#fff" };
 position:relative;
 width: 280px;
 height: 260px;
@@ -148,10 +160,11 @@ letter-spacing: 0.28px;
 }
 
 .title{
+
     width: 100%;
     word-wrap: break-word; 
     text-align:center;
-    color: #282828;
+    color: ${({$cardtype})=> $cardtype === 'Challenge' ? "#fff" : "#282828" };
 text-align: center;
 font-family: Roboto;
 font-size: 20px;
@@ -164,6 +177,19 @@ line-height: normal;
     }
 }
 
+.challenge-text {
+color: #B9C3C8;
+text-align: center;
+font-family: Roboto;
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+letter-spacing: 0.28px;
+text-transform: uppercase;
+margin-bottom: 5px;
+}
+
 .date-time{
     color: #B9C3C8;
 text-align: center;
@@ -173,7 +199,7 @@ font-style: normal;
 font-weight: 400;
 line-height: normal;
 letter-spacing: 0.36px;
-margin-top: 10px;
+margin-top: 5px;
 
 @media screen and (min-width:768px) {
     font-size: 14px;

@@ -1,14 +1,14 @@
 import { StyledLi } from "./Card.styled";
 import { useState, useEffect } from "react";
 import { Formik, Field } from "formik";
-import { StyledForm, StyledClearSvg, StyledLineVertSvg, StyledStarSvg } from "components/FormAddTask/FormAddTask.styled";
+import { StyledForm, StyledClearSvg, StyledLineVertSvg, StyledStarSvg,StyledTrophySvg, StyledInputField, StyledLabel } from "components/FormAddTask/FormAddTask.styled";
 import { SelectLevel } from "components/ReactSelect/SelectLevel";
 import { SelectType } from "components/ReactSelect/SelectType";
 import { DatePickerTask } from "components/DatePicker/DatePickerTask";
 import { changeEditStatus } from "redux/cards/cardsSlice";
 import { useDispatch, useSelector } from 'react-redux';
 import { editCardThunk, deleteCardThunk,completeCardThunk } from "redux/cards/operations";
-import { StyledCheckSvg, StyledSaveSvg ,StyledStarSvgBlue} from "./Card.styled";
+import { StyledCheckSvg, StyledSaveSvg ,StyledStarSvgBlue, StyledTrophySvgAction} from "./Card.styled";
 import {formatJustDateToWord } from "helpers/formatJustDate";
 import { ReactComponent as FireSvg } from '../../../images/fire.svg';
 import { useTimeRemaining, useCheckOvertime, getDifficultyColor, getCategoryBackgroundColor } from "helpers/hooks";
@@ -21,7 +21,7 @@ export const Card = ({ card, handleEditing, editId }) => {
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const editStatus = useSelector(state => state.cards.editStatus);
     const cards = useSelector(state => state.cards.cards);
-    const dispatch = useDispatch();
+     const dispatch = useDispatch();
   const timeRemaining = useTimeRemaining(date, time);
   const overtimed = useCheckOvertime(date, time);
     const handleCloseModal = () => {
@@ -65,7 +65,8 @@ const day = String(values.selectDate.getDate()).padStart(2, '0');
    
 
     return (
-       cards.length > 0 && <StyledLi
+        cards.length > 0 && <StyledLi
+            $cardtype={type}
                 $overtimed={overtimed.toString()}
                 onClick={() => {
                     if (overtimed) {
@@ -79,15 +80,19 @@ const day = String(values.selectDate.getDate()).padStart(2, '0');
                 }
                 }>
                 {!isEditing ?
-                    <>
-                        <StyledStarSvgBlue
+                <>
+                    {type === 'Challenge' ? <StyledTrophySvgAction onMouseEnter={() => setStarHovered(true)}
+                            onMouseLeave={() => setStarHovered(false)}
+                            onClick={() => dispatch(completeCardThunk(_id))}/>:   <StyledStarSvgBlue
                             onMouseEnter={() => setStarHovered(true)}
                             onMouseLeave={() => setStarHovered(false)}
-                            onClick={() => dispatch(completeCardThunk(_id))} />
+                            onClick={() => dispatch(completeCardThunk(_id))} />}
+                      
                         <span className='difficulty' ><span className='circle' style={{ backgroundColor: colorDiff }}></span>{difficulty}</span>
                         <span className='category' style={{ backgroundColor: categoryBackgroundColor }}>{category}</span>
-                        <div className='infoblock'>
-                            <p className='title'>{title}</p>
+                    <div className='infoblock'>
+                        {type === 'Challenge' && <p className="challenge-text">Challenge</p>}
+                            <p $cardtype={type} className='title'>{title}</p>
                             <p className={`date-time ${overtimed ? 'overtimed-date-time' : ''}`}>{overtimed ? 'Failed' : `${formatJustDateToWord(date)}, ${time}`} {timeRemaining !== null && timeRemaining ? <FireSvg /> : <></>}</p>
                         </div>
                     </> :
@@ -127,8 +132,8 @@ const day = String(values.selectDate.getDate()).padStart(2, '0');
                                     )}
                                 </Field>
                                 <div className='addtask-name-block'>
-                                    <label className='task-label' htmlFor="taskInput">Edit Quest</label>
-                                    <Field type="text" name="taskInput" id="taskInput" required />
+                                    <StyledLabel $cardtype={type} className='task-label' htmlFor="taskInput">{type === 'Challenge' ? 'Edit Challenge' : 'Edit Quest'}</StyledLabel>
+                                    <StyledInputField $cardtype={type} type="text" name="taskInput" id="taskInput" required />
                                 </div>
                                 <Field name="selectDate">
                                     {({ field }) => (
@@ -156,7 +161,7 @@ const day = String(values.selectDate.getDate()).padStart(2, '0');
                                         dispatch(changeEditStatus(false))
                                     }}><StyledCheckSvg /></button>
                                 </div>
-                                <StyledStarSvg />
+                            {type === 'Challenge' ? <StyledTrophySvg/> : <StyledStarSvg />}
                             </StyledForm>
                         )}
                     </Formik>}

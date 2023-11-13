@@ -1,7 +1,35 @@
 import { styled } from 'styled-components';
+import { ReactComponent as AwardSvg } from '../../../images/award.svg';
+
+export const StyledAwardSvg = styled(AwardSvg)`
+position: absolute;
+top:40px;
+left:40px;
+.arrow-first-part {
+  transition: all 500ms ease;
+}
+.arrow-second-part {
+  transition: all 500ms ease;
+}
+.arrow-first-part {
+transform: translate(50px,-50px);
+}
+
+.arrow-second-part {
+transform: translate(50px,-50px);
+}
+
+&:hover .arrow-first-part{
+      transform: translate(0,0);
+      }
+
+&:hover .arrow-second-part{
+      transform: translate(0,0);
+}
+`
 
 export const StyledLi = styled.li`
-background-color: #fff;
+background-color: ${({$cardtype})=> $cardtype === 'Challenge' ? "#15395A" : "#fff" };
 position:relative;
 width: 280px;
 height: 260px;
@@ -88,12 +116,23 @@ letter-spacing: 0.28px;
     transform : translate(-50%, -50%);
     width: 154px;
 }
-
+.challenge-text {
+color: #B9C3C8;
+text-align: center;
+font-family: Roboto;
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+letter-spacing: 0.28px;
+text-transform: uppercase;
+margin-bottom: 5px;
+}
 .title{
     width: 100%;
     word-wrap: break-word; 
     text-align:center;
-    color: #282828;
+    color: ${({$cardtype})=> $cardtype === 'Challenge' ? "#fff" : "#282828" };
 text-align: center;
 font-family: Roboto;
 font-size: 20px;
