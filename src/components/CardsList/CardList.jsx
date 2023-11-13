@@ -72,7 +72,7 @@ export const CardList = ({ children }) => {
   };
   return (
     <StyledMainDiv>
-      <p className="dayname-text">Today</p>
+      <p className="dayname-text dayname-text-today">Today</p>
 
       <StyledCardList>
         {children}

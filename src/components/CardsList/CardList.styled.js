@@ -34,13 +34,16 @@ font-weight: 300;
 line-height: normal;
 letter-spacing: 0.3px;
 white-space: nowrap;
-margin-bottom: 18px;
+
 cursor: pointer;
 
 transition: all 250ms linear;
 }
 .dayname-text {
     position: relative;
+}
+.dayname-text-today{
+margin-bottom: 18px;
 }
 
 .dayname-text-hide::after {
