@@ -8,7 +8,7 @@ import { DatePickerTask } from "components/DatePicker/DatePickerTask";
 import { changeEditStatus } from "redux/cards/cardsSlice";
 import { useDispatch, useSelector } from 'react-redux';
 import { editCardThunk, deleteCardThunk,completeCardThunk } from "redux/cards/operations";
-import { StyledCheckSvg, StyledSaveSvg ,StyledStarSvgBlue, StyledTrophySvgAction} from "./Card.styled";
+import { StyledCheckSvg, StyledSaveSvg ,StyledStarSvgBlue, StyledTrophySvgAction,StyledTitle} from "./Card.styled";
 import {formatJustDateToWord } from "helpers/formatJustDate";
 import { ReactComponent as FireSvg } from '../../../images/fire.svg';
 import { useTimeRemaining, useCheckOvertime, getDifficultyColor, getCategoryBackgroundColor } from "helpers/hooks";
@@ -19,6 +19,8 @@ export const Card = ({ card, handleEditing, editId }) => {
   const [isEditing, setIsEditing] = useState(false);
     const [starHovered, setStarHovered] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
+  
+    console.log(type)
     const editStatus = useSelector(state => state.cards.editStatus);
     const cards = useSelector(state => state.cards.cards);
      const dispatch = useDispatch();
@@ -92,7 +94,7 @@ const day = String(values.selectDate.getDate()).padStart(2, '0');
                         <span className='category' style={{ backgroundColor: categoryBackgroundColor }}>{category}</span>
                     <div className='infoblock'>
                         {type === 'Challenge' && <p className="challenge-text">Challenge</p>}
-                            <p $cardtype={type} className='title'>{title}</p>
+                            <StyledTitle $cardtype={type}>{title}</StyledTitle>
                             <p className={`date-time ${overtimed ? 'overtimed-date-time' : ''}`}>{overtimed ? 'Failed' : `${formatJustDateToWord(date)}, ${time}`} {timeRemaining !== null && timeRemaining ? <FireSvg /> : <></>}</p>
                         </div>
                     </> :

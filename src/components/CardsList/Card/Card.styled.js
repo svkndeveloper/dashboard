@@ -3,7 +3,22 @@ import { ReactComponent as CheckSvg } from '../../../images/check.svg'
 import {ReactComponent as SaveSvg} from '../../../images/save.svg'
 import { ReactComponent as StarSvg } from '../../../images/star.svg'
 import { ReactComponent as TrophySvg } from '../../../images/trophy.svg';
+export const StyledTitle = styled.p`
+   width: 100%;
+    word-wrap: break-word; 
+    text-align:center;
+    color: ${({$cardtype})=> $cardtype === 'Challenge' ? "#fff" : "#282828" };
+text-align: center;
+font-family: Roboto;
+font-size: 20px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
 
+@media screen and (min-width:768px) {
+    font-size: 16px;
+    }
+`
 export const StyledTrophySvgAction = styled(TrophySvg)`
 position:absolute;
 top:20px;
@@ -159,23 +174,7 @@ letter-spacing: 0.28px;
     width: 154px;
 }
 
-.title{
 
-    width: 100%;
-    word-wrap: break-word; 
-    text-align:center;
-    color: ${({$cardtype})=> $cardtype === 'Challenge' ? "#fff" : "#282828" };
-text-align: center;
-font-family: Roboto;
-font-size: 20px;
-font-style: normal;
-font-weight: 700;
-line-height: normal;
-
-@media screen and (min-width:768px) {
-    font-size: 16px;
-    }
-}
 
 .challenge-text {
 color: #B9C3C8;

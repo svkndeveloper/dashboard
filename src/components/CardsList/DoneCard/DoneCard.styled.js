@@ -1,31 +1,77 @@
-import { styled } from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 import { ReactComponent as AwardSvg } from '../../../images/award.svg';
 
+export const StyledTitle = styled.p`
+
+    width: 100%;
+    word-wrap: break-word; 
+    text-align:center;
+    color: ${({$cardtype})=> $cardtype === 'Challenge' ? "#fff" : "#282828" };
+text-align: center;
+font-family: Roboto;
+font-size: 20px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+
+@media screen and (min-width:768px) {
+    font-size: 16px;
+    }
+
+`
+const fadeInOut = keyframes`
+  from {
+    opacity: 0;
+    transform: translate(450px, -450px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+`;
+const fadeInOutAnimation = css`
+  animation: ${fadeInOut} 1500ms ease;
+`;
 export const StyledAwardSvg = styled(AwardSvg)`
 position: absolute;
 top:40px;
 left:40px;
-.arrow-first-part {
-  transition: all 500ms ease;
-}
-.arrow-second-part {
-  transition: all 500ms ease;
-}
-.arrow-first-part {
-transform: translate(50px,-50px);
-}
+ ${({ $award }) =>
+    $award &&
+     css`.arrow-first-part,
+    .arrow-second-part {
+      ${fadeInOutAnimation}
+    }
 
-.arrow-second-part {
-transform: translate(50px,-50px);
-}
+    // .arrow-first-part {
+    //   transform: translate(0, 0);
+    // }
 
-&:hover .arrow-first-part{
-      transform: translate(0,0);
-      }
+    // .arrow-second-part {
+    //   transform: translate(0, 0);
+    // }
+  `}
+// .arrow-first-part {
+//   transition: all 500ms ease;
+// }
+// .arrow-second-part {
+//   transition: all 500ms ease;
+// }
+// .arrow-first-part {
+// transform: translate(50px,-50px);
+// }
 
-&:hover .arrow-second-part{
-      transform: translate(0,0);
-}
+// .arrow-second-part {
+// transform: translate(50px,-50px);
+// }
+
+// &:hover .arrow-first-part{
+//       transform: translate(0,0);
+//       }
+
+// &:hover .arrow-second-part{
+//       transform: translate(0,0);
+// }
 `
 
 export const StyledLi = styled.li`
