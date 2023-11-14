@@ -10,7 +10,7 @@ import { StyledMainDiv,StyledHeader,StyledContainer,StyledHeaderContainer,Styled
 import { useSelector } from "react-redux";
 import { useNarrowScreen } from "helpers/hooks";
 
-export const Dashboard = () => {
+export default function Dashboard(){
   const [showModal, setShowModal] = useState(false);
   const currentUser = useSelector(state => state.auth.currentUser);
    const firstLetter = (currentUser && currentUser.charAt(0)) ?? 'U';

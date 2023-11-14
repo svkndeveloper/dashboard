@@ -2,7 +2,7 @@ import { RegistrationForm } from "components/RegistrationForm/RegistrationForm";
 import { RegisterLoginBase } from "./RegisterLoginBase/RegisterLoginBase";
 import { StyledMainDiv,StyledSection } from "./Register.styled";
 import { animated , useTransition} from 'react-spring';
-export const RegisterPage = () => {
+export default function RegisterPage(){
       const transitions = useTransition(true, {
     from: { opacity: 0, transform: 'translateY(100%)' },
     enter: {

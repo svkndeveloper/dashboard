@@ -1,13 +1,15 @@
 import { styled } from "styled-components";
 import firstBg from 'images/firstLandsapeBg1x-min.png';
-// import firstBg2x from 'images/firstLandsapeBg2x-min.png';
+import firstBg2x from 'images/firstLandsapeBg2x-min.png';
 import secondBg from 'images/secondLandsapeBg1x-min.png';
-// import secondBg2x from 'images/secondLandsapeBg2x-min.png';
+import secondBg2x from 'images/secondLandsapeBg2x-min.png';
 import bgRect from '../images/bgRect.png';
 import bgRect2 from '../images/bgRect2.png';
 
 export const StyledSection = styled.section`
 position:relative;
+min-height: 100vh;
+
 @media screen and (max-width: 767px){
    background-image: url(${bgRect}), url(${bgRect2}); 
        background-repeat: no-repeat;
@@ -17,7 +19,13 @@ position:relative;
   background-image: url(${firstBg}), url(${secondBg});
     background-repeat: no-repeat;
     background-position: top 0 right 0, bottom 0px right 0px;
+    // @media (min-device-pixel-ratio: 2),
+    //   (min-resolution: 192dpi),
+    //   (min-resolution: 2dppx) {
+    //   background-image: url(${firstBg2x}), url(${secondBg2x});
+    //   }
     }
+}
 `
 export const StyledMainDiv = styled.div`
 overflow-x: hidden;

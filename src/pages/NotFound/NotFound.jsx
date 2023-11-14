@@ -2,7 +2,7 @@ import { StyledNotFoundDiv, StyledErrorBlock, StyledNavLink,StyledErrorSvg } fro
 import { refreshError } from "redux/auth/slice";
 import { useDispatch, useSelector } from "react-redux";
 
-export const NotFound = () => {
+export default function NotFound() {
     const dispatch = useDispatch();
     const authError = useSelector(state=>state.auth.authError)
 
