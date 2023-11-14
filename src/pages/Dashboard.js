@@ -16,7 +16,7 @@ export const Dashboard = () => {
   // const userEmail = useSelector(state => state.auth.isLoggedIn);
   const cards = useSelector(state => state.cards.cards);
   const doneCards = useSelector(state => state.cards.doneCards);
-  const firstLetter = currentUser.charAt(0);
+  const firstLetter = currentUser?.charAt(0) ?? 'U';
   const isNarrowScreen = useNarrowScreen();
   const transformedUser = currentUser.charAt(0).toUpperCase() + currentUser.slice(1);
   
