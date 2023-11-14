@@ -3,7 +3,7 @@ import { register, logIn, logOut, refreshUser } from './operations';
 
 const initialState = {
   user: { name: null, email: null },
-  // token: null,
+  authError: null,
   isLoggedIn: false,
   isRefreshing: false,
   error: null,
@@ -18,18 +18,22 @@ const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
+    refreshError(state) {
+state.error = null
+    },
     setCurrentUser(state, action) {
       state.currentUser = action.payload
     },
   },
   extraReducers: builder =>
     builder.addCase(register.fulfilled, (state, action) => {
-    console.log(action)      
+         
     })
       .addCase(register.rejected, (state, action) => {
        console.log(action)
         state.error = action.payload;
         state.pending = false;
+        state.authError = 'registerError';
     })
     .addCase(logIn.pending,state => {
       state.pending = true;
@@ -48,6 +52,7 @@ const authSlice = createSlice({
         console.log(action)
         state.error = action.payload;
         state.pending = false;
+        state.authError = 'loginError';
     })
       .addCase(logOut.fulfilled, state => {
       state.user = { name: null, email: null };
@@ -74,4 +79,4 @@ const authSlice = createSlice({
 );
 
 export const authReducer = authSlice.reducer;
-export const { setCurrentUser} = authSlice.actions;
+export const { setCurrentUser, refreshError} = authSlice.actions;

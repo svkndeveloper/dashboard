@@ -13,9 +13,12 @@ import {
 import { compareTime } from 'helpers/timeSorter';
 import { CSSTransition } from 'react-transition-group';
 import '../App.css';
+import { PacmanLoaderSpinner } from 'components/Loaders/TaskLoader/TaskLoader';
+
 export const CardList = ({ children }) => {
   const cards = useSelector(state => state.cards.cards);
   const doneCards = useSelector(state => state.cards.doneCards);
+  const cardIsLoading = useSelector(state => state.cards.isLoading);
   const [otherCards, setOtherCards] = useState([]);
   const [todayCards, setTodayCards] = useState([]);
   const [tomorrowCards, setTomorrowCards] = useState([]);
@@ -72,12 +75,15 @@ export const CardList = ({ children }) => {
   };
   return (
     <StyledMainDiv>
+      {cardIsLoading && <PacmanLoaderSpinner />}
       <p className="dayname-text-today">Today</p>
 
       <StyledCardList>
         {children}
+       
          {todayCards.length > 0 &&
           todayCards.map(card => (
+            
             <Card
               key={card._id}
               card={card}

@@ -5,7 +5,8 @@ import { StyledForm, StyledClearSvg, StyledLineVertSvg,StyledStarSvg, StyledTrop
 import { DatePickerTask } from 'components/DatePicker/DatePickerTask';
 import { useDispatch,useSelector} from 'react-redux';
 import { addCardThunk } from 'redux/cards/operations';
-
+import { toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 export const FormAddTask = ({handleCloseModal}) => {
   const cardType = useSelector(state => state.cards.cardType);
@@ -13,7 +14,16 @@ export const FormAddTask = ({handleCloseModal}) => {
 
     const handleSubmit = (values, { resetForm } )=> {
                         if (!values.selectDate) {
-            return alert('оберіть дату');
+            return toast.info('Choose date and time',  {
+position: "top-center",
+autoClose: 2000,
+hideProgressBar: false,
+closeOnClick: true,
+pauseOnHover: true,
+draggable: true,
+progress: undefined,
+theme: "colored",
+});
           }
  const year = values.selectDate.getFullYear();
 const month = String(values.selectDate.getMonth() + 1).padStart(2, '0'); 
@@ -32,7 +42,8 @@ const day = String(values.selectDate.getDate()).padStart(2, '0');
         time: formattedTime,
         type: cardType
       }
-         dispatch(addCardThunk(newCard))
+      
+               dispatch(addCardThunk(newCard))
       handleCloseModal()
       resetForm();
     };

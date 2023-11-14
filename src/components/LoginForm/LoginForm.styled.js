@@ -3,6 +3,10 @@ import TextField from '@mui/material/TextField';
 import { ReactComponent as Eye } from '../../images/eye.svg';
 import { ReactComponent as Eye1 } from '../../images/eye1.svg';
 
+export const FormControlWrap = styled.div`
+position:relative;
+`
+
 export const StyledEye = styled(Eye)`
 transition: all 250ms linear;
 &:hover path {
@@ -60,7 +64,7 @@ gap: 10px;
     background-color: transparent;
     border:none;
     position: absolute;
-    bottom: 35px;
+    bottom: 5px;
     right: 0;
 }
 .password-btn-login{
@@ -70,7 +74,7 @@ gap: 10px;
     background-color: transparent;
     border:none;
     position: absolute;
-    bottom: 95px;
+    bottom: 5px;
     right: 0;
 }
 `

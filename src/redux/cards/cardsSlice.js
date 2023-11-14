@@ -42,12 +42,10 @@ const cardsSlice = createSlice({
     state.isLoading = true; 
     })
             .addCase(addCardThunk.fulfilled, (state, action) => {
-                
-        state.isLoading = false;
-                state.error = null;
-               
-      state.cards = [action.payload.createdCard, ...state.cards];
-            })
+                state.isLoading = false;
+        state.error = null;               
+        state.cards = [action.payload.createdCard, ...state.cards];
+                    })
             .addCase(addCardThunk.rejected, (state, action) => {
                
          state.isLoading = false;
@@ -107,4 +105,5 @@ const cardsSlice = createSlice({
 })
 
 export const cardsReducer = cardsSlice.reducer
-export const { pickCardType,changeEditStatus} = cardsSlice.actions;
+export const { pickCardType, changeEditStatus } = cardsSlice.actions;
+
