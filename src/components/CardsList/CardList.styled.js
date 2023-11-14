@@ -41,6 +41,7 @@ transition: all 250ms linear;
 }
 .dayname-text {
     position: relative;
+    margin-bottom: 18px;
 }
 .dayname-text-today{
         color: #282828;

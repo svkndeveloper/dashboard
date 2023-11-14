@@ -3,6 +3,17 @@ import { ReactComponent as CheckSvg } from '../../../images/check.svg'
 import {ReactComponent as SaveSvg} from '../../../images/save.svg'
 import { ReactComponent as StarSvg } from '../../../images/star.svg'
 import { ReactComponent as TrophySvg } from '../../../images/trophy.svg';
+import { animated} from 'react-spring';
+
+export const StyledAnimatedDiv = styled(animated.div)`
+position:relative;
+width: 280px;
+height: 260px;
+@media screen and (min-width:768px) {
+    width: 224px;
+ height: 208px;
+}
+`
 export const StyledTitle = styled.p`
    width: 100%;
     word-wrap: break-word; 
@@ -102,8 +113,8 @@ height: 208px;
 }
 @media screen and (min-width:1280px) {
     
-    width: calc((100% - 128px) / 5);
-
+    // width: calc((100% - 128px) / 5);
+width: 100%;
 
 }
 

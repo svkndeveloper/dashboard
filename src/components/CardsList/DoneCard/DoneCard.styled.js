@@ -1,13 +1,29 @@
 import styled, { keyframes, css } from 'styled-components';
 import { ReactComponent as AwardSvg } from '../../../images/award.svg';
+export const StyledSpan = styled.span`
 
-export const StyledTitle = styled.p`
+color: ${({$show})=> $show ? '#000' : '#00D7FF'};
+text-decoration: ${({$show})=> $show ? '' : 'underline'};
+font-size: 17px;
+  overflow: ${({$show})=> $show ? '' : 'hidden'};
+  text-overflow: ${({$show})=> $show ? '' : 'ellipsis'};
+  width: ${({$show})=> $show ? '130px' : '110px'};
+  word-wrap: ${({$show})=> $show ? 'break-word' : ''};
+  letter-spacing: 1px;
+  z-index:100;
+`
+export const StyledTitle = styled.span`
+// position: absolute;
+// top:15px;
+// left: 10px;
 
-    width: 100%;
-    word-wrap: break-word; 
-    text-align:center;
+
+
+
+     
+    // text-align:center;
     color: ${({$cardtype})=> $cardtype === 'Challenge' ? "#fff" : "#282828" };
-text-align: center;
+
 font-family: Roboto;
 font-size: 20px;
 font-style: normal;
@@ -34,44 +50,20 @@ const fadeInOutAnimation = css`
 `;
 export const StyledAwardSvg = styled(AwardSvg)`
 position: absolute;
-top:40px;
-left:40px;
+top:60px;
+left:70px;
  ${({ $award }) =>
     $award &&
      css`.arrow-first-part,
     .arrow-second-part {
       ${fadeInOutAnimation}
     }
-
-    // .arrow-first-part {
-    //   transform: translate(0, 0);
-    // }
-
-    // .arrow-second-part {
-    //   transform: translate(0, 0);
-    // }
   `}
-// .arrow-first-part {
-//   transition: all 500ms ease;
-// }
-// .arrow-second-part {
-//   transition: all 500ms ease;
-// }
-// .arrow-first-part {
-// transform: translate(50px,-50px);
-// }
 
-// .arrow-second-part {
-// transform: translate(50px,-50px);
-// }
-
-// &:hover .arrow-first-part{
-//       transform: translate(0,0);
-//       }
-
-// &:hover .arrow-second-part{
-//       transform: translate(0,0);
-// }
+  @media screen and (min-width:768px){
+    top:40px;
+left:40px;
+  }
 `
 
 export const StyledLi = styled.li`
@@ -89,17 +81,18 @@ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   box-shadow: 0 8px 16px rgba(0, 215, 255, 0.3); 
 }
 @media screen and (min-width:768px) {
-      width: calc((100% - 32px) / 3);
+      // width: calc((100% - 32px) / 3);
 height: 208px;
+ width: 224px;
 }
 @media screen and (min-width:1280px) {
-        width: calc((100% - 128px) / 5);
+        // width: calc((100% - 128px) / 5);
 }
 
 .difficulty{
     position: absolute;
-    top:20px;
-    left:35px;
+    bottom:25px;
+    right:20px;
 color: #B9C3C8;
 font-family: Roboto;
 font-size: 16px;
@@ -173,6 +166,12 @@ line-height: normal;
 letter-spacing: 0.28px;
 text-transform: uppercase;
 margin-bottom: 5px;
+
+
+position: absolute;
+transform: rotate(-90deg);
+left: -20px;
+top: 85px;
 }
 .title{
     width: 100%;
@@ -201,6 +200,12 @@ font-weight: 400;
 line-height: normal;
 letter-spacing: 0.36px;
 margin-top: 10px;
+width: 120px;
+
+position: absolute;
+transform: rotate(90deg);
+right: -40px;
+top: 80px;
 
 @media screen and (min-width:768px) {
     font-size: 14px;
