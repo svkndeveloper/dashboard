@@ -18,7 +18,7 @@ export const Dashboard = () => {
   const doneCards = useSelector(state => state.cards.doneCards);
   const firstLetter = (currentUser && currentUser.charAt(0)) ?? 'U';
   const isNarrowScreen = useNarrowScreen();
-  const transformedUser = currentUser.charAt(0).toUpperCase() + currentUser.slice(1);
+  const transformedUser = (currentUser && currentUser.charAt(0).toUpperCase() + currentUser.slice(1))?? 'User';
   
    useEffect(() => {
     if (cards.length > 0 || doneCards.length > 0) return;
