@@ -1,7 +1,7 @@
 import { logOut } from "redux/auth/operations";
 import { useDispatch } from "react-redux";
 import { AddTaskButton } from "components/AddTaskButton/AddTaskButton";
-import { useState,useEffect } from "react";
+import { useState } from "react";
 import { ModalNewTask } from "components/ModalNewTask/ModalNewTask";
 import { pickCardType } from "redux/cards/cardsSlice";
 import { CardList } from "components/CardsList/CardList";
@@ -13,17 +13,10 @@ import { useNarrowScreen } from "helpers/hooks";
 export const Dashboard = () => {
   const [showModal, setShowModal] = useState(false);
   const currentUser = useSelector(state => state.auth.currentUser);
-  // const userEmail = useSelector(state => state.auth.isLoggedIn);
-  const cards = useSelector(state => state.cards.cards);
-  const doneCards = useSelector(state => state.cards.doneCards);
-  const firstLetter = (currentUser && currentUser.charAt(0)) ?? 'U';
+   const firstLetter = (currentUser && currentUser.charAt(0)) ?? 'U';
   const isNarrowScreen = useNarrowScreen();
   const transformedUser = (currentUser && currentUser.charAt(0).toUpperCase() + currentUser.slice(1))?? 'User';
-  
-   useEffect(() => {
-    if (cards.length > 0 || doneCards.length > 0) return;
-    setShowModal(true)
-  },[cards.length, doneCards.length])
+
     const handleCloseModal = () => {
         setShowModal(false)
     }

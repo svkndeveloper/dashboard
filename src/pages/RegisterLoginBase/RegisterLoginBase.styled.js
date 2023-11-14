@@ -37,7 +37,7 @@ font-style: normal;
 font-weight: 700;
 line-height: 1.61;
 letter-spacing: 0.36px;
-margin-top: 40px;
+margin-top: 20px;
 margin-bottom:32px;
 
 @media screen and (min-width: 768px){

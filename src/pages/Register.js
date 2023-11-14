@@ -1,6 +1,6 @@
 import { RegistrationForm } from "components/RegistrationForm/RegistrationForm";
 import { RegisterLoginBase } from "./RegisterLoginBase/RegisterLoginBase";
-import { StyledMainDiv } from "./Register.styled";
+import { StyledMainDiv,StyledSection } from "./Register.styled";
 import { animated , useTransition} from 'react-spring';
 export const RegisterPage = () => {
       const transitions = useTransition(true, {
@@ -17,13 +17,15 @@ export const RegisterPage = () => {
         transitions(
           (styles, item) =>
          item && (
-        <animated.div style={{ ...styles, overflow: 'hidden', height: "100vh" }}>
+              <animated.div style={{ ...styles, overflow: 'hidden', height: "100vh" }}>
+                <StyledSection>
                 <StyledMainDiv>
-                  <div className='backgrounds-div'></div>
+                  {/* <div className='backgrounds-div'></div> */}
         <RegisterLoginBase/>
               <RegistrationForm/>
               
-        </StyledMainDiv>
+                  </StyledMainDiv>
+                  </StyledSection>
        </animated.div>
         
          ))

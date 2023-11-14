@@ -56,7 +56,9 @@ position: relative;
 display: flex;
 flex-direction: column;
 gap: 10px;
-
+@media screen and (min-width:768px){
+    width: 250px;
+}
 .password-btn{
     cursor: pointer;
     width:30px;
