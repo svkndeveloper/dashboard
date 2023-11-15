@@ -107,15 +107,12 @@ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   box-shadow: 0 8px 16px rgba(0, 215, 255, 0.3); 
 }
 @media screen and (min-width:768px) {
-    // width: 224px;
-    width: calc((100% - 32px) / 3);
-height: 208px;
+        // width: calc((100% - 32px) / 3);
+    width: 100%;
+    height: 208px;
 }
 @media screen and (min-width:1280px) {
-    
-    // width: calc((100% - 128px) / 5);
-width: 100%;
-
+        // width: calc((100% - 128px) / 5);
 }
 
 .difficulty{
