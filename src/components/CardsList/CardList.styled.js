@@ -53,24 +53,26 @@ line-height: normal;
 letter-spacing: 0.3px;
 white-space: nowrap;
 margin-bottom: 18px;
+
 }
 
 .dayname-text-hide::after {
     content: "";
-    // position: absolute;
-    background-color: transparent;
     height: 1px;
-    width: 100%;
+    width: 100%;    
+     border-bottom: 3px dashed #B9C3C8;
+
+  // position: absolute;
+    // background-color: transparent;
     // top: 50%;
-    
-    transform: translateY(-50%);
-    // border-bottom: 1px dashed #B9C3C8;
-    background-image: repeating-linear-gradient(to right, transparent, transparent 4px, #B9C3C8 6px, #B9C3C8 12px);
+    // transform: translateY(-50%);
+    // background: repeating-linear-gradient(to right, transparent, transparent 4px, #B9C3C8 6px, #B9C3C8 12px);
 }
 .dayname-text-hide:hover::after {
     content: "";
+   border-bottom-color: #00D7FF;
    
-    background-image: repeating-linear-gradient(to right, transparent, transparent 4px, #00D7FF 6px, #00D7FF 12px);
+    // background: repeating-linear-gradient(to right, transparent, transparent 4px, #00D7FF 6px, #00D7FF 12px);
 }
 
 

@@ -81,7 +81,7 @@ export const CardList = ({ children }) => {
       <StyledCardList>
         {children}
        
-         {todayCards.length > 0 &&
+         {todayCards && todayCards.length > 0 &&
           todayCards.map(card => (
             
             <Card
@@ -100,14 +100,14 @@ export const CardList = ({ children }) => {
         Tommorrow {tomorrowCards.length > 0 && cards.length > 0 && <StyledTommorowSvg $tomorrowcards={showTomorrowCards} />}
       </p>
       <CSSTransition
-        in={showTomorrowCards}
+        in={showTomorrowCards && tomorrowCards.length > 0}
         nodeRef={nodeRef}
         timeout={300}
         classNames="cards"
         unmountOnExit
       >
         <StyledCardList ref={nodeRef}>
-          {tomorrowCards.length > 0 && 
+          {tomorrowCards && tomorrowCards.length > 0 && 
             tomorrowCards.map(card => (
               <Card
                 key={card._id}
@@ -122,7 +122,7 @@ export const CardList = ({ children }) => {
         className="dayname-text dayname-text-hide"
         onClick={() => setShowOtherCards(!showOtherCards)}
       >
-        Other days {otherCards.length > 0 && cards.length > 0 && <StyledOtherSvg $othercards={showOtherCards} />}
+        Other days {otherCards && otherCards.length > 0 && <StyledOtherSvg $othercards={showOtherCards} />}
       </p>
       <CSSTransition
         in={showOtherCards}
@@ -132,7 +132,7 @@ export const CardList = ({ children }) => {
         unmountOnExit
       >
         <StyledCardList ref={nodeRef2}>
-          {otherCards.length > 0 &&
+          {otherCards && otherCards.length > 0 &&
             otherCards.map(card => (
               <Card
                 key={card._id}
@@ -148,17 +148,17 @@ export const CardList = ({ children }) => {
         onClick={() => setDoneCards(!showDoneCards)}
       >
         DONE
-        {doneCards.length > 0 && <StyledDoneSvg $doneCards={showDoneCards} />}
+        {doneCards && doneCards.length > 0 && <StyledDoneSvg $doneCards={showDoneCards} />}
       </p>
       <CSSTransition
-        in={showDoneCards}
+        in={showDoneCards && doneCards.length > 0}
         nodeRef={nodeRef3}
         timeout={300}
         classNames="cards"
         unmountOnExit
       >
         <StyledCardList ref={nodeRef3}>
-          {doneCards.length > 0 &&
+          {doneCards && doneCards.length > 0 &&
             doneCards.map(card => (
               <DoneCard
                 key={card._id}
